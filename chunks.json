@@ -1,127 +1,219 @@
 [
   {
+    "app": "232250",
     "depot": "232256",
+    "fileList": null,
     "manifest": "7216127081639525620",
     "hash": "sha256-DUrtswus8dIoWJdHSVDlhyUYHmyOfDRWH0PAprDKqew="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "hl2/hl2_misc_dir.vpk\ntf/cfg/pure_server_full.txt\ntf/cfg/pure_server_minimal.txt\ntf/cfg/trusted_keys_base.txt\ntf/gameinfo.txt\ntf/maps/itemtest.bsp\ntf/scripts/items/items_game.txt\ntf/scripts/items/items_game.txt.sig\ntf/scripts/protodefs/proto_defs.vpd\ntf/scripts/protodefs/proto_defs.vpd.sig\ntf/steam.inf\ntf/tf2_misc_dir.vpk\n",
+    "manifest": "5494866935743571710",
     "hash": "sha256-AZV/oOnjrR+KzzdXRFDrq29zluBnFS2lY9+FhlULuzI="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "hl2/hl2_misc_000.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-Zyiub5MCnIEnNLHDZscwCLOXH8L8iaTxSvKCYH4Y8bI="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "hl2/hl2_misc_001.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-Zyw9vJ3Q6I+/RlxCzhYltODWW28v736bKuk8jDr+u4w="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "hl2/hl2_misc_002.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-iEwCQeiw/CVUWcrzra72Xg7pTbeq20p74nT5IdhxZko="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "hl2/hl2_misc_003.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-Kjbm6YyD1y+D2yjB1DPUno2267Xk+wG5UVRRMWqSY0w="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_000.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-7ziLdlTdgquECn5E9+tvSvJJRekFIfsTtd+fHIrg9Uo="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_001.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-A+i39/5MVomDaugFborB0Bhy9Jac35U27KTUTqOrleE="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_002.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-A2sSZeaMLsyLiMQqMzQmhEP1S/NgTpDMMdGSOPIH4Oc="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_003.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-omznsHFwTAPCal0xzQwxYPkdkC2JuPgEJ8Jo0kKQdyU="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_004.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-znN8PQUI8VtlHl43YieSgxvAxOaoyM3V2Zy+q19PvhE="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_005.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-DLuQ9ISg+fc2JPeDe59LF/rth1EaWsVbyNopkCLyFsc="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_006.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-u2rEAv1LVBDQZosBHcRwtxXVINXUUpHJClhERXNfW1M="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_007.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-Yzc9upE9pBWzC32ypVE0VikXbpnjuH9B3XsEAdtTG58="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_008.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-sobGjdEpp9NcEW95zWhM0yllXGO2AFTfodzr6C5qCOQ="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_009.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-Frg/59ssJmYaDBzHJdgbUNI/WHQHTQrP9Kyn2aIJF88="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_010.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-eymD/Duv8HyJSSzOVzti9KbZtzjawUs94cgaXcYeMio="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_011.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-+hoyTmqzmCYKr2qc4Jy5gzakqNOpD6odnhiLPrraf/c="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_012.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-V1YFaSPW3kT+K31rxvfLwaWs/LUeilmTgSWXXNpq2/Q="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_013.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-H3FdJH3fP18c2RoOM5+jX2UxK5n5eT0b2U4wMOptLSM="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_014.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-qAQeaev0jJ5t9oUSDm4pCmXG0zYUPxvfIwYnRUy6WN4="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_015.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-s0Aqj60vxhGDixy+Z7pjcI+IPOr5dijMSsr3s+0SyHc="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_016.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-Ux6FI5ROp0LcP6jXJJhDtozX5bUEg7SekofbPMmGeY8="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_017.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-J7x3BJVTW5juoYEPxuAoHjwVSt6oMYCNNLoV6A0XqRA="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_018.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-FNbpj8AY88K2zOUXeuXxVPrAJNK+cN3g6N4HVSnT8U0="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_019.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-OYvFwJj31A9GAU6AghEhMh1sndyJEB0bE8WbxUK4Syo="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_020.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-HmDIYzDIVlQ4PViDBxFbacvvPazH5LZBxROfkNkIql8="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_021.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-tEOJp+pvDdeimZhRWautfbTyekd1A546ejqioc8iTwg="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_022.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-qEsKb6ZhLO3bVTGti++1xw9EhxQSuvSh/XIAxf3urP8="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_023.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-qoi+g7lgvUPQgsOADs83v+3CO8RCSRtq2gJficb4ZWQ="
   },
   {
+    "app": "232250",
+    "depot": "232250",
     "fileList": "tf/tf2_misc_024.vpk",
+    "manifest": "5494866935743571710",
     "hash": "sha256-g+0y+HeJuXVQPn1cuEmnKKdGVL2oem/z9zQM6XNHAnA="
   }
 ]

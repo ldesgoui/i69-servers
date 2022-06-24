@@ -1,14 +1,14 @@
 {
-  perSystem = { config, lib, pkgs, ... }: {
-    options.tf2ds =
-      let
-        inherit (lib) mkOption types;
-        inherit (config.tf2ds) manifests;
-      in
-      {
+  perSystem = { config, lib, pkgs, ... }:
+    let
+      inherit (lib) mkOption types;
+      cfg = config.tf2ds;
+    in
+    {
+      options.tf2ds = {
         version = mkOption {
           type = types.str;
-          default = "0+2022.06.23";
+          default = "2022.06.23";
         };
 
         manifests = mkOption {
@@ -36,7 +36,7 @@
 
                   manifest = mkOption {
                     type = str;
-                    default = manifests.${toString config.depot};
+                    default = cfg.manifests.${toString config.depot};
                   };
 
                   fileList = mkOption {
@@ -54,7 +54,7 @@
           });
 
           default = [
-            { depot = 232256; }
+            { depot = "232256"; }
             {
               fileList = ''
                 hl2/hl2_misc_dir.vpk
@@ -103,84 +103,90 @@
           ];
         };
 
+        chunkName = mkOption { type = types.raw; };
+        chunkToArgs = mkOption { type = types.raw; };
         fetchDepot = mkOption { type = types.raw; };
       };
 
-    config.tf2ds.chunks = lib.importJSON ./chunks.json;
+      config.tf2ds = {
+        chunks = lib.mkIf (builtins.pathExists ./chunks.json) (lib.importJSON ./chunks.json);
 
-    config.tf2ds.fetchDepot = { app, depot, manifest, fileList, hash }:
-      pkgs.runCommand "depot-${depot}.${manifest}"
-        {
-          buildInputs = [
-            pkgs.cacert
-            config.packages.depotdownloader
-          ];
+        chunkName = { depot, manifest, ... }:
+          "depot-${depot}.${manifest}";
 
-          outputHashAlgo = "sha256";
-          outputHash = hash;
-          outputHashMode = "recursive";
+        chunkToArgs = chunk @ { fileList, ... }:
+          lib.concatStringsSep " "
+            (lib.cli.toGNUCommandLine
+              { mkOptionName = k: "-${k}"; }
+              {
+                inherit (lib.mapAttrs (_: lib.escapeShellArg) chunk) app depot manifest;
+                filelist = lib.optional (fileList != null) ''"$fileListPath"'';
+                dir = ''"$out"'';
+              });
 
-          inherit app depot manifest fileList;
-          passAsFile = [ "fileList" ];
-        }
-        ''
-          HOME=$(mktemp -d) DepotDownloader \
-            -app "$app" \
-            -depot "$depot" \
-            -manifest "$manifest" \
-            ${pkgs.lib.optionalString (fileList != null) ''-filelist "$fileListPath"''} \
-            -dir "$out"
+        fetchDepot = chunk @ { app, depot, manifest, fileList, hash }:
+          pkgs.runCommand (cfg.chunkName chunk)
+            {
+              buildInputs = [
+                pkgs.cacert
+                config.packages.depotdownloader
+              ];
 
-          rm -rf "$out/.DepotDownloader"
-        '';
+              outputHashAlgo = "sha256";
+              outputHash = hash;
+              outputHashMode = "recursive";
 
-    config.packages.tf2ds = pkgs.symlinkJoin {
-      name = "tf2-dedicated-server-${config.tf2ds.version}";
-      inherit (config.tf2ds) version;
-      paths = map config.tf2ds.fetchDepot config.tf2ds.chunks;
+              inherit (chunk) app depot manifest fileList;
+              passAsFile = [ "fileList" ];
+            }
+            ''
+              HOME=$(mktemp -d) DepotDownloader ${cfg.chunkToArgs chunk}
+              rm -rf "$out/.DepotDownloader"
+            '';
+      };
+
+      config.packages = {
+        tf2ds = pkgs.symlinkJoin {
+          name = "tf2-dedicated-server-${cfg.version}";
+          inherit (cfg) version;
+          paths = map cfg.fetchDepot cfg.chunks;
+        };
+
+        prefetch-tf2ds-chunks =
+          pkgs.writeShellScriptBin "prefetch-tf2ds-chunks" ''
+            set -euo pipefail
+
+            export PATH=${config.packages.depotdownloader}/bin:${pkgs.jq}/bin:$PATH
+
+            tmp=$(mktemp -dt prefetch-tf2ds.XXX)
+
+            ${lib.flip lib.concatImapStrings cfg.chunks (i: chunk: ''
+              echo '--- Fetching chunk #${toString i}'
+
+              dir=$tmp/chunk-${toString i}
+              mkdir -p $dir
+
+              out=$dir/${cfg.chunkName chunk}
+
+              ${pkgs.lib.optionalString (chunk.fileList != null) ''
+                fileListPath=$dir/file-list.txt
+                echo ${lib.escapeShellArg chunk.fileList} > "$fileListPath"
+              ''}
+
+              DepotDownloader ${cfg.chunkToArgs chunk}
+              rm -rf "$out/.DepotDownloader"
+
+              hash=$(nix hash path "$out")
+              nix store add-path "$out"
+
+              jq --arg hash "$hash" '.hash = $hash' > "$tmp/${toString (1000 + i)}.json" << END
+              ${builtins.toJSON { inherit (chunk) app depot manifest fileList; }}
+              END
+
+            '')}
+
+            jq -s '.' "$tmp"/*.json > chunks.json
+          '';
+      };
     };
-
-    config.packages.prefetch-tf2ds-chunks =
-      pkgs.writeShellScriptBin "prefetch-tf2ds-chunks" ''
-        set -euo pipefail
-
-        export PATH=${config.packages.depotdownloader}/bin:$PATH
-
-        tmp=$(mktemp -d)
-
-        ${lib.flip lib.concatImapStrings config.tf2ds.chunks (i: {app, depot, manifest, fileList, ...}: ''
-          out=$tmp/${toString i}/depot-${depot}.${manifest}
-
-          mkdir -p $out
-
-          ${pkgs.lib.optionalString (fileList != null) ''
-            fileListPath=$tmp/${toString i}/file-list.txt
-            echo "${fileList}" > "$fileListPath"
-          ''} 
-
-          DepotDownloader \
-            -app "${app}" \
-            -depot "${depot}" \
-            -manifest "${manifest}" \
-            ${pkgs.lib.optionalString (fileList != null) ''-filelist "$fileListPath"''} \
-            -dir "$out"
-
-          rm -rf "$out/.DepotDownloader"
-
-          hash=$(nix hash path "$out")
-
-          nix store add-path "$out"
-
-          cat > ${toString i}.json << END
-          {
-            "app": ${builtins.toJSON app},
-            "depot": ${builtins.toJSON depot},
-            "manifest": ${builtins.toJSON manifest},
-            "fileList": ${builtins.toJSON fileList},
-            "hash": "$hash"
-          }
-          END
-        '')}
-      '';
-  };
 }
