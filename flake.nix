@@ -1,4 +1,14 @@
 {
+  nixConfig = {
+    extra-substituters = [
+      "i69-servers.cachix.org"
+    ];
+
+    extra-trusted-public-keys = [
+      "i69-servers.cachix.org-1:mH3TBiferuVUu5ufo3BFlY+aCyjNGK2oPa3XXHYDnGk="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
@@ -15,5 +25,13 @@
           ./depotdownloader.nix
           ./package-tf2ds.nix
         ];
+
+        perSystem = { pkgs, ... }: {
+          devShells.default = pkgs.mkShellNoCC {
+            packages = [
+              pkgs.cachix
+            ];
+          };
+        };
       };
 }
