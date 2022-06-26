@@ -2,17 +2,15 @@
   nixConfig = {
     extra-substituters = [
       "https://i69-servers.cachix.org"
-      "https://nixpkgs-unfree.cachix.org"
     ];
 
     extra-trusted-public-keys = [
       "i69-servers.cachix.org-1:mH3TBiferuVUu5ufo3BFlY+aCyjNGK2oPa3XXHYDnGk="
-      "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
     ];
   };
 
   inputs = {
-    nixpkgs.url = "github:numtide/nixpkgs-unfree/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs.follows = "nixpkgs";

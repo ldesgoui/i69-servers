@@ -47,11 +47,12 @@
           path = "${config.packages.tf2ds}";
         }
         {
+          # Keyed `mod` because the game searches for `<mod>/scripts/item/items_game.txt`
           keys = [ "mod" "game" ];
           path = "${config.packages.tf2ds}/tf";
         }
         {
-          keys = [ "mod" "game" ];
+          keys = [ "game" ];
           path = "${config.packages.tf2ds}/hl2";
         }
         {
@@ -65,11 +66,13 @@
       gameinfo =
         let
           paths =
-            lib.concatMapStringsSep "\n"
+            lib.concatMapStringsSep "\n      "
               ({ keys, path }: ''"${lib.concatStringsSep "+" keys}" "${path}"'')
               config.tf2ds.searchPaths;
         in
         pkgs.writeText "gameinfo.txt" ''
+          // This file was auto-generated
+
           #base "${config.packages.tf2ds}/tf/gameinfo.txt"
 
           GameInfo {
@@ -86,20 +89,17 @@
 
         state=$(realpath "''${TF2DS_STATE:-./tf2ds}")
 
-        mkdir -p "$state"/tf
-        ln -fns ${config.packages.tf2ds} "$state"/.drv
+        mkdir -p "$state"/tf "$state"/.steam/sdk32
         ln -fns ${config.packages.gameinfo} "$state"/tf/gameinfo.txt
+        ln -fns ${config.packages.tf2ds} "$state"/.drv
+        ln -fns ${config.packages.tf2ds}/bin/steamclient.so "$state"/.steam/sdk32/
 
-        exec \
-        ${lib.getExe pkgs.steam-run-native} \
-        ${lib.getExe pkgs.strace} -o "$state"/.trace \
-        sh << END
-        LD_LIBRARY_PATH=${config.packages.tf2ds}/bin:\$LD_LIBRARY_PATH \
-          exec -a "$state"/srcds_run \
+        HOME=$state \
+        LD_LIBRARY_PATH=${config.packages.tf2ds}/bin:${pkgs.pkgsi686Linux.ncurses5}/lib \
+          exec -a "$state"/srcds_linux \
             ${config.packages.tf2ds}/srcds_linux \
               -game tf \
               $@
-        END
       '';
     };
   };

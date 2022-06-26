@@ -48,13 +48,18 @@
                     type = str;
                     default = lib.fakeHash;
                   };
+
+                  patch = mkOption {
+                    type = bool;
+                    default = false;
+                  };
                 };
               })
             ];
           });
 
           default = [
-            { depot = "232256"; }
+            { depot = "232256"; patch = true; }
             {
               fileList = ''
                 hl2/hl2_misc_dir.vpk
@@ -120,25 +125,55 @@
                 dir = ''"$out"'';
               });
 
-        lib.fetchDepot = chunk @ { app, depot, manifest, fileList, hash }:
-          pkgs.runCommand (cfg.lib.chunkName chunk)
-            {
-              buildInputs = [
-                pkgs.cacert
-                config.packages.depotdownloader
-              ];
+        lib.fetchDepot = chunk:
+          let
+            depot = pkgs.runCommand (cfg.lib.chunkName chunk)
+              {
+                buildInputs = [
+                  pkgs.cacert
+                  config.packages.depotdownloader
+                ];
 
-              outputHashAlgo = "sha256";
-              outputHash = hash;
-              outputHashMode = "recursive";
+                outputHashAlgo = "sha256";
+                outputHash = chunk.hash;
+                outputHashMode = "recursive";
 
-              inherit (chunk) app depot manifest fileList;
-              passAsFile = [ "fileList" ];
-            }
-            ''
-              HOME=$(mktemp -d) DepotDownloader ${cfg.lib.chunkToArgs chunk}
-              rm -rf "$out/.DepotDownloader"
-            '';
+                inherit (chunk) app depot manifest fileList;
+                passAsFile = [ "fileList" ];
+              }
+              ''
+                HOME=$(mktemp -d) DepotDownloader ${cfg.lib.chunkToArgs chunk}
+                rm -rf "$out/.DepotDownloader"
+              '';
+
+
+            mkPatched = { stdenv, autoPatchelfHook, curl }:
+              stdenv.mkDerivation {
+                inherit (depot) name;
+
+                src = depot;
+
+                dontUnpack = true;
+                dontStrip = true;
+
+                nativeBuildInputs = [
+                  autoPatchelfHook
+                ];
+
+                buildInputs = [
+                  stdenv.cc.cc.lib
+                  (curl.override { gnutlsSupport = true; opensslSupport = false; })
+                ];
+
+                installPhase = ''
+                  cp -r $src/. $out
+                '';
+              };
+          in
+          if chunk.patch then
+            pkgs.pkgsi686Linux.callPackage mkPatched { }
+          else
+            depot;
       };
 
       config.packages = {
