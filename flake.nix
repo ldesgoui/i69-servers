@@ -26,6 +26,7 @@
         imports = [
           ./depotdownloader.nix
           ./package-tf2ds.nix
+          ./run-tf2ds.nix
         ];
 
         perSystem = { lib, pkgs, ... }: {
