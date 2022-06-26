@@ -28,8 +28,10 @@
           ./package-tf2ds.nix
         ];
 
-        perSystem = { pkgs, ... }: {
-          devShells.default = pkgs.mkShellNoCC {
+        perSystem = { lib, pkgs, ... }: {
+          options.tf2ds.lib = lib.mkOption { type = lib.types.anything; };
+
+          config.devShells.default = pkgs.mkShellNoCC {
             packages = [
               pkgs.cachix
             ];

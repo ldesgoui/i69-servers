@@ -102,19 +102,15 @@
             { fileList = "tf/tf2_misc_024.vpk"; }
           ];
         };
-
-        chunkName = mkOption { type = types.raw; };
-        chunkToArgs = mkOption { type = types.raw; };
-        fetchDepot = mkOption { type = types.raw; };
       };
 
       config.tf2ds = {
         chunks = lib.mkIf (builtins.pathExists ./chunks.json) (lib.importJSON ./chunks.json);
 
-        chunkName = { depot, manifest, ... }:
+        lib.chunkName = { depot, manifest, ... }:
           "depot-${depot}.${manifest}";
 
-        chunkToArgs = chunk @ { fileList, ... }:
+        lib.chunkToArgs = chunk @ { fileList, ... }:
           lib.concatStringsSep " "
             (lib.cli.toGNUCommandLine
               { mkOptionName = k: "-${k}"; }
@@ -124,8 +120,8 @@
                 dir = ''"$out"'';
               });
 
-        fetchDepot = chunk @ { app, depot, manifest, fileList, hash }:
-          pkgs.runCommand (cfg.chunkName chunk)
+        lib.fetchDepot = chunk @ { app, depot, manifest, fileList, hash }:
+          pkgs.runCommand (cfg.lib.chunkName chunk)
             {
               buildInputs = [
                 pkgs.cacert
@@ -140,7 +136,7 @@
               passAsFile = [ "fileList" ];
             }
             ''
-              HOME=$(mktemp -d) DepotDownloader ${cfg.chunkToArgs chunk}
+              HOME=$(mktemp -d) DepotDownloader ${cfg.lib.chunkToArgs chunk}
               rm -rf "$out/.DepotDownloader"
             '';
       };
@@ -149,7 +145,7 @@
         tf2ds = pkgs.symlinkJoin {
           name = "tf2-dedicated-server-${cfg.version}";
           inherit (cfg) version;
-          paths = map cfg.fetchDepot cfg.chunks;
+          paths = map cfg.lib.fetchDepot cfg.chunks;
         };
 
         prefetch-tf2ds-chunks =
@@ -166,14 +162,14 @@
               dir=$tmp/chunk-${toString i}
               mkdir -p $dir
 
-              out=$dir/${cfg.chunkName chunk}
+              out=$dir/${cfg.lib.chunkName chunk}
 
               ${pkgs.lib.optionalString (chunk.fileList != null) ''
                 fileListPath=$dir/file-list.txt
                 echo ${lib.escapeShellArg chunk.fileList} > "$fileListPath"
               ''}
 
-              DepotDownloader ${cfg.chunkToArgs chunk}
+              DepotDownloader ${cfg.lib.chunkToArgs chunk}
               rm -rf "$out/.DepotDownloader"
 
               hash=$(nix hash path "$out")
