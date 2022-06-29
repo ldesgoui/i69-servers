@@ -94,9 +94,11 @@
     run = pkgs.writeShellScriptBin "run-tf2ds" ''
       set -euo pipefail
 
+      gen_pass() { head -c 10 /dev/urandom | base32; }
+
       state=$(realpath "''${TF2DS_STATE:-./tf2ds}")
-      password=''${PASSWORD:-$(${lib.getExe pkgs.xkcdpass} -n 3 -d-)}
-      rcon_password=''${RCON_PASSWORD:-$(${lib.getExe pkgs.xkcdpass} -n 3 -d-)}
+      password=''${PASSWORD:-$(gen_pass)}
+      rcon_password=''${RCON_PASSWORD:-$(gen_pass)}
 
       echo "---"
       echo "--- State dir:     $state"
