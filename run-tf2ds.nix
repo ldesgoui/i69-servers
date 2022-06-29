@@ -55,6 +55,14 @@
         path = "${config.packages.tf2ds}/hl2";
       }
       {
+        keys = [ "mod" "game" ];
+        path = "${config.packages.all-configs}/tf";
+      }
+      {
+        keys = [ "mod" "game" ];
+        path = "${config.packages.all-addons}/tf";
+      }
+      {
         keys = [ "game" "download" ];
         path = "tf/download";
       }
@@ -87,17 +95,37 @@
       set -euo pipefail
 
       state=$(realpath "''${TF2DS_STATE:-./tf2ds}")
+      password=''${PASSWORD:-$(${lib.getExe pkgs.xkcdpass} -n 3 -d-)}
+      rcon_password=''${RCON_PASSWORD:-$(${lib.getExe pkgs.xkcdpass} -n 3 -d-)}
 
-      mkdir -p "$state"/tf "$state"/.steam/sdk32
+      echo "---"
+      echo "--- State dir:     $state"
+      echo "--- Password:      $password"
+      echo "--- Rcon password: $rcon_password"
+      echo "---"
+
+      mkdir -p "$state"/{tf/addons,.steam/sdk32}
+      ${pkgs.findutils}/bin/find "$state" -type l -delete
+
       ln -fns ${config.packages.gameinfo} "$state"/tf/gameinfo.txt
       ln -fns ${config.packages.tf2ds} "$state"/.drv
       ln -fns ${config.packages.tf2ds}/bin/steamclient.so "$state"/.steam/sdk32/
+
+      ${lib.getExe pkgs.xorg.lndir} -silent ${config.packages.all-plugins} "$state"
 
       HOME=$state \
       LD_LIBRARY_PATH=${config.packages.tf2ds}/bin:${pkgs.pkgsi686Linux.ncurses5}/lib \
       exec -a "$state"/srcds_linux \
         ${config.packages.tf2ds}/srcds_linux \
-          -game tf \
+          ${config.tf2ds.lib.toArgs {
+            game = "tf";
+            ip = "0.0.0.0";
+            maxplayers = 24;
+            commands = [
+              "map itemtest"
+            ];
+          }} \
+          "+sv_password $password" "+rcon_password $rcon_password" \
           $@
     '';
   };

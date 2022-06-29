@@ -25,6 +25,7 @@
           imports = [
             ./depotdownloader.nix
             ./package-tf2ds.nix
+            ./plugins.nix
             ./run-tf2ds.nix
           ];
 
