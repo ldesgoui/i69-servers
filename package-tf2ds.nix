@@ -210,7 +210,7 @@ in
           nix store add-path "$out"
 
           jq --arg hash "$hash" '.hash = $hash' > "$tmp/${toString (1000 + i)}.json" << END
-          ${builtins.toJSON { inherit (chunk) app depot manifest fileList; }}
+          ${builtins.toJSON { inherit (chunk) app depot manifest fileList patch; }}
           END
 
         '')}
