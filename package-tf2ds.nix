@@ -7,14 +7,14 @@ in
   options.tf2ds = {
     version = mkOption {
       type = types.str;
-      default = "2022.06.23";
+      default = "2022.07.08";
     };
 
     manifests = mkOption {
       type = with types; attrsOf str;
       default = {
-        "232250" = "5494866935743571710";
-        "232256" = "7216127081639525620";
+        "232250" = "3604311116260912466";
+        "232256" = "283614991341263929";
       };
     };
 
