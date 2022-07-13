@@ -124,6 +124,7 @@
             ip = "0.0.0.0";
             maxplayers = 24;
             commands = [
+              "sv_pure 2"
               "map itemtest"
             ];
           }} \
