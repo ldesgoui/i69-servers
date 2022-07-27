@@ -18,24 +18,39 @@
 
   outputs = { self, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit self; }
-      {
-        systems = [ "x86_64-linux" ];
+      ({ config, ... }:
+        let
+          rootConfig = config;
+        in
+        {
+          systems = [ "x86_64-linux" ];
 
-        perSystem = { lib, pkgs, ... }: {
           imports = [
-            ./depotdownloader.nix
-            ./package-tf2ds.nix
-            ./plugins.nix
-            ./run-tf2ds.nix
+            ./proxmox-images.nix
           ];
 
-          options.tf2ds.lib = lib.mkOption { type = lib.types.anything; };
-
-          config.devShells.default = pkgs.mkShellNoCC {
-            packages = [
-              pkgs.cachix
+          perSystem = { lib, pkgs, ... }: {
+            imports = [
+              ./depotdownloader.nix
+              ./package-tf2ds.nix
+              ./plugins.nix
+              ./run-tf2ds.nix
             ];
+
+            options.tf2ds.lib = lib.mkOption { type = lib.types.anything; };
+
+            config.packages.vma = (pkgs.nixos {
+              imports = [
+                rootConfig.flake.nixosModules.proxmox-firestarter
+              ];
+            }).VMA;
+
+            config.devShells.default = pkgs.mkShellNoCC {
+              packages = [
+                pkgs.cachix
+              ];
+            };
           };
-        };
-      };
+        });
+
 }
