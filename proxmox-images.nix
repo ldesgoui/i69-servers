@@ -36,6 +36,10 @@
       passwordAuthentication = false;
     };
 
+    networking = {
+      useDHCP = false;
+    };
+
     networking.firewall = {
       allowedTCPPorts = config.services.openssh.ports;
     };
