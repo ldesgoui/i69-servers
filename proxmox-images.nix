@@ -26,7 +26,10 @@
     };
 
     # Use cloud-init to set up network interfaces on boot
-    services.cloud-init.network.enable = true;
+    services.cloud-init = {
+      enable = true;
+      network.enable = true;
+    };
 
     services.openssh = {
       enable = true;
