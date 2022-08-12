@@ -3,23 +3,23 @@
     "app": "232250",
     "depot": "232256",
     "fileList": null,
-    "manifest": "283614991341263929",
+    "manifest": "8170027178822639735",
     "patch": true,
-    "hash": "sha256-2nuxIKOqk4/fe2t3gcPMUZjTZo8/wJshR5JhP8u5r9s="
+    "hash": "sha256-IfgXwp/B2P7zkjd9DBKaq/GNdlVu5jTPt72OQxB6bBc="
   },
   {
     "app": "232250",
     "depot": "232250",
     "fileList": "hl2/hl2_misc_dir.vpk\ntf/cfg/pure_server_full.txt\ntf/cfg/pure_server_minimal.txt\ntf/cfg/trusted_keys_base.txt\ntf/gameinfo.txt\ntf/maps/itemtest.bsp\ntf/scripts/items/items_game.txt\ntf/scripts/items/items_game.txt.sig\ntf/scripts/protodefs/proto_defs.vpd\ntf/scripts/protodefs/proto_defs.vpd.sig\ntf/steam.inf\ntf/tf2_misc_dir.vpk\n",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
-    "hash": "sha256-Nglzd803ZKabqmaJoOy6X5H+WK8VQd8riXXTkNA8zGs="
+    "hash": "sha256-PPOp82X789CdIY/Qq7oGIdet+2vM9IRYuhmqz2NJzcI="
   },
   {
     "app": "232250",
     "depot": "232250",
     "fileList": "hl2/hl2_misc_000.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-Zyiub5MCnIEnNLHDZscwCLOXH8L8iaTxSvKCYH4Y8bI="
   },
@@ -27,7 +27,7 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "hl2/hl2_misc_001.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-Zyw9vJ3Q6I+/RlxCzhYltODWW28v736bKuk8jDr+u4w="
   },
@@ -35,7 +35,7 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "hl2/hl2_misc_002.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-iEwCQeiw/CVUWcrzra72Xg7pTbeq20p74nT5IdhxZko="
   },
@@ -43,7 +43,7 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "hl2/hl2_misc_003.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-Kjbm6YyD1y+D2yjB1DPUno2267Xk+wG5UVRRMWqSY0w="
   },
@@ -51,31 +51,31 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_000.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
-    "hash": "sha256-7ziLdlTdgquECn5E9+tvSvJJRekFIfsTtd+fHIrg9Uo="
+    "hash": "sha256-EhVGWtDLDXQQflkBQVdEZYiSqMyeAzzaz1eTK7yUrD0="
   },
   {
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_001.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
-    "hash": "sha256-A+i39/5MVomDaugFborB0Bhy9Jac35U27KTUTqOrleE="
+    "hash": "sha256-UAcPdBo+mNdiBjFEjzT14qRNt/0CSkLuKu/fDbbfcFw="
   },
   {
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_002.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
-    "hash": "sha256-A2sSZeaMLsyLiMQqMzQmhEP1S/NgTpDMMdGSOPIH4Oc="
+    "hash": "sha256-r8DhoipO0NwATseiZXp2frPcwNkTbBZ0OU2bAIo4a6U="
   },
   {
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_003.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-omznsHFwTAPCal0xzQwxYPkdkC2JuPgEJ8Jo0kKQdyU="
   },
@@ -83,7 +83,7 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_004.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-znN8PQUI8VtlHl43YieSgxvAxOaoyM3V2Zy+q19PvhE="
   },
@@ -91,15 +91,15 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_005.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
-    "hash": "sha256-9z/bkGxQtu+K53WorT/7MKvLvKvKtoC5AJc7xfbuPXk="
+    "hash": "sha256-HS07HM8nlvGb4wuRrk2Hub/v3gL2TFgttXvitR7wi4Y="
   },
   {
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_006.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-u2rEAv1LVBDQZosBHcRwtxXVINXUUpHJClhERXNfW1M="
   },
@@ -107,15 +107,15 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_007.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
-    "hash": "sha256-MVL7Hc5/mEnmEXBlAHLXwEWLeN4HSCorPk5H55FmyVY="
+    "hash": "sha256-su+obvMZFL8918zF7urGy4nyYdhLhC5YnkU9fJl2KYY="
   },
   {
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_008.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-sobGjdEpp9NcEW95zWhM0yllXGO2AFTfodzr6C5qCOQ="
   },
@@ -123,7 +123,7 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_009.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-Frg/59ssJmYaDBzHJdgbUNI/WHQHTQrP9Kyn2aIJF88="
   },
@@ -131,7 +131,7 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_010.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-3V+3sjJSeFVDKwNTwwK9u2d1zl/h+Gib8PYEplHki+4="
   },
@@ -139,15 +139,15 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_011.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
-    "hash": "sha256-+hoyTmqzmCYKr2qc4Jy5gzakqNOpD6odnhiLPrraf/c="
+    "hash": "sha256-lTaoW+8Q2iprS03VLmkcM4sUs2JPkHbR6UtWLpsCIoo="
   },
   {
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_012.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-V1YFaSPW3kT+K31rxvfLwaWs/LUeilmTgSWXXNpq2/Q="
   },
@@ -155,7 +155,7 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_013.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-H3FdJH3fP18c2RoOM5+jX2UxK5n5eT0b2U4wMOptLSM="
   },
@@ -163,39 +163,39 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_014.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
-    "hash": "sha256-qAQeaev0jJ5t9oUSDm4pCmXG0zYUPxvfIwYnRUy6WN4="
+    "hash": "sha256-CAu75A0tJt5ChQXaDz/gG62SZ0j0Xe5OCZM/YFK+KDI="
   },
   {
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_015.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
-    "hash": "sha256-s0Aqj60vxhGDixy+Z7pjcI+IPOr5dijMSsr3s+0SyHc="
+    "hash": "sha256-UxYnedqDSrXEnVGudZ5LVc/u0MwpC+qmnU5iqqnZZxQ="
   },
   {
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_016.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
-    "hash": "sha256-Ux6FI5ROp0LcP6jXJJhDtozX5bUEg7SekofbPMmGeY8="
+    "hash": "sha256-rioNc1amExuTbYVcHJy6KiEyqTvXNtql+ddQ3/wAxUo="
   },
   {
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_017.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
-    "hash": "sha256-J7x3BJVTW5juoYEPxuAoHjwVSt6oMYCNNLoV6A0XqRA="
+    "hash": "sha256-WYZUVmr5JAiu5Tbg3/HTcQo0fglJ6s8EGHrza6uM51Y="
   },
   {
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_018.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-FNbpj8AY88K2zOUXeuXxVPrAJNK+cN3g6N4HVSnT8U0="
   },
@@ -203,7 +203,7 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_019.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-OYvFwJj31A9GAU6AghEhMh1sndyJEB0bE8WbxUK4Syo="
   },
@@ -211,7 +211,7 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_020.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-HmDIYzDIVlQ4PViDBxFbacvvPazH5LZBxROfkNkIql8="
   },
@@ -219,15 +219,15 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_021.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
-    "hash": "sha256-gcdatoXHRjhcWLsw0UIO8LlfV4YaP8ECUmuU2F4xUHM="
+    "hash": "sha256-kCiXVNeKb9+I2SOuXamRbNlE7k2swhfYCmpIupKfX/Q="
   },
   {
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_022.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-qEsKb6ZhLO3bVTGti++1xw9EhxQSuvSh/XIAxf3urP8="
   },
@@ -235,15 +235,15 @@
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_023.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
-    "hash": "sha256-qoi+g7lgvUPQgsOADs83v+3CO8RCSRtq2gJficb4ZWQ="
+    "hash": "sha256-AlSen2wseMG2Oh2uK/ILzc/d/ImmcDegSAQfDr3eglA="
   },
   {
     "app": "232250",
     "depot": "232250",
     "fileList": "tf/tf2_misc_024.vpk",
-    "manifest": "3604311116260912466",
+    "manifest": "269398806166434327",
     "patch": false,
     "hash": "sha256-g+0y+HeJuXVQPn1cuEmnKKdGVL2oem/z9zQM6XNHAnA="
   }
