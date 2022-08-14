@@ -1,14 +1,4 @@
 {
-  nixConfig = {
-    extra-substituters = [
-      "https://i69-servers.cachix.org"
-    ];
-
-    extra-trusted-public-keys = [
-      "i69-servers.cachix.org-1:mH3TBiferuVUu5ufo3BFlY+aCyjNGK2oPa3XXHYDnGk="
-    ];
-  };
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -56,12 +46,6 @@
                 };
               in
               nixos.VMA;
-
-            config.devShells.default = pkgs.mkShellNoCC {
-              packages = [
-                pkgs.cachix
-              ];
-            };
           };
         });
 
