@@ -26,7 +26,7 @@
           systems = [ "x86_64-linux" ];
 
           imports = [
-            ./proxmox-images.nix
+            ./servers.nix
           ];
 
           perSystem = { lib, pkgs, ... }: {
@@ -39,11 +39,23 @@
 
             options.tf2ds.lib = lib.mkOption { type = lib.types.anything; };
 
-            config.packages.vma = (pkgs.nixos {
-              imports = [
-                rootConfig.flake.nixosModules.proxmox-firestarter
-              ];
-            }).VMA;
+            config.packages.vma =
+              let
+                nixos = pkgs.nixos {
+                  imports = [
+                    rootConfig.flake.nixosModules.server-common
+                  ];
+
+                  proxmox = {
+                    qemuConf = rec {
+                      cores = 5;
+                      memory = cores * 4 * 1024;
+                      name = "i69-servers-firestarter";
+                    };
+                  };
+                };
+              in
+              nixos.VMA;
 
             config.devShells.default = pkgs.mkShellNoCC {
               packages = [
