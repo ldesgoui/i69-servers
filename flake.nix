@@ -4,6 +4,8 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs.follows = "nixpkgs";
+
+    colmena.url = "github:zhaofengli/colmena/v0.3.0";
   };
 
   outputs = { self, flake-parts, ... }:
@@ -19,7 +21,7 @@
             ./servers.nix
           ];
 
-          perSystem = { lib, pkgs, ... }: {
+          perSystem = { lib, pkgs, inputs', ... }: {
             imports = [
               ./depotdownloader.nix
               ./package-tf2ds.nix
@@ -46,6 +48,12 @@
                 };
               in
               nixos.VMA;
+
+            config.devShells.default = pkgs.mkShellNoCC {
+              packages = [
+                inputs'.colmena.packages.colmena
+              ];
+            };
           };
         });
 
