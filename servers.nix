@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ config, lib, self, inputs, ... }: {
   flake.nixosModules = {
     server-common = { config, modulesPath, ... }: {
       imports = [
@@ -15,6 +15,8 @@
         man.enable = lib.mkForce false;
         nixos.enable = lib.mkForce false;
       };
+
+      i18n.supportedLocales = lib.mkForce [ "en_US.UTF-8/UTF-8" ];
 
       networking = {
         useDHCP = false;
@@ -46,9 +48,9 @@
       users.users.root = {
         initialPassword = "toor";
 
-        openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK25ea20daUVvmTPmUL1nF/0DXEz/7tPBXOSerQNTf6+ me@ldesgoui.xyz"
-          "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC94Qd2XQoffOcrsEbZfwOzNPy8PZgyAchycchIohhYVnqx5EVwlBMbOBKR5VUnXXxiglFS+HvfAUmHJth5dBdnfuUr3f1wkth5w+KwjnWzIlrFW30+zsc1CsUfluUQc1kW2qx8Z/ytS28zgL/B14yEcRoTgMJBjmWkLe060lROx1VR8Elp3sRJjClTZ64o6CeM4QaxIaDd1ZL008KcAEcK1bcScpvCSfRGCUAu+TTwxz0/cyb9x21I9x67FpELlAegw3y/6A7tbpSFZY/WG+eRwrTeAXK799rzV6Brg5RadOVa3PAsxOpIjgLQ/klH+m487UNCuoNE+SiukoP3OUjh proto"
+        openssh.authorizedKeys.keyFiles = [
+          "${self}/ssh/ldesgoui.pub"
+          "${self}/ssh/proto.pub"
         ];
       };
     };
