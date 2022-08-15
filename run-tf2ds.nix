@@ -110,7 +110,6 @@
       ${pkgs.findutils}/bin/find "$state" -type l -delete
 
       ln -fns ${config.packages.gameinfo} "$state"/tf/gameinfo.txt
-      ln -fns ${config.packages.tf2ds} "$state"/.drv
       ln -fns ${config.packages.tf2ds}/bin/steamclient.so "$state"/.steam/sdk32/
 
       ${lib.getExe pkgs.xorg.lndir} -silent ${config.packages.all-plugins} "$state"
