@@ -147,7 +147,6 @@ in
             rm -rf "$out/.DepotDownloader"
           '';
 
-
         mkPatched = { stdenv, autoPatchelfHook, curl }:
           stdenv.mkDerivation {
             inherit (depot) name;
