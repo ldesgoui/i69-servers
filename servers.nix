@@ -4,7 +4,14 @@ let
 in
 {
   flake.nixosModules = {
-    common = { config, ... }: {
+    common = { config, name, ... }: {
+      deployment.keys = {
+        ssh_host_ed25519_key = {
+          keyCommand = [ "age" "-i" "/home/ldesgoui/.ssh/id_ed25519" "-d" "ssh/host-${name}.age" ];
+          destDir = "/etc/ssh";
+        };
+      };
+
       # from modules/profiles/headless.nix
       boot.loader.grub.splashImage = null;
 
@@ -28,6 +35,11 @@ in
         enable = true;
         passwordAuthentication = false;
         ports = [ 50022 ];
+
+        hostKeys = [{
+          type = "ed25519";
+          path = "/etc/ssh/ssh_host_ed25519_key";
+        }];
       };
 
       system.stateVersion = "22.11";
