@@ -34,7 +34,7 @@ in
       services.openssh = {
         enable = true;
         passwordAuthentication = false;
-        ports = [ 50022 ];
+        ports = [ config.deployment.targetPort ];
 
         hostKeys = [{
           type = "ed25519";
@@ -117,6 +117,8 @@ in
     meta.nixpkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
 
     defaults = { name, ... }: {
+      deployment.targetPort = 50022;
+
       imports = [
         modules.common
       ]
