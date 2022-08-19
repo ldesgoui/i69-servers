@@ -6,6 +6,21 @@
     flake-parts.inputs.nixpkgs.follows = "nixpkgs";
 
     colmena.url = "github:zhaofengli/colmena/v0.3.0";
+
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    agenix-cli = {
+      url = "github:cole-h/agenix-cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dns = {
+      url = "github:kirelagin/dns.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, flake-parts, ... }:
@@ -52,6 +67,11 @@
             config.devShells.default = pkgs.mkShellNoCC {
               packages = [
                 inputs'.colmena.packages.colmena
+
+                pkgs.age
+                inputs'.agenix-cli.packages.agenix-cli
+
+                pkgs.knot-dns
               ];
             };
           };
