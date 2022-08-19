@@ -27,6 +27,7 @@ in
       services.openssh = {
         enable = true;
         passwordAuthentication = false;
+        ports = [ 50022 ];
       };
 
       system.stateVersion = "22.11";
