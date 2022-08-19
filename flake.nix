@@ -35,7 +35,7 @@
               let
                 nixos = pkgs.nixos {
                   imports = [
-                    rootConfig.flake.nixosModules.server-common
+                    rootConfig.flake.nixosModules.game-server
                   ];
 
                   proxmox = {
