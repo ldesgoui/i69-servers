@@ -37,6 +37,7 @@
             ./instances.nix
             ./servers.nix
             ./service.nix
+            ./wireguard.nix
           ];
 
           perSystem = { lib, pkgs, inputs', ... }: {

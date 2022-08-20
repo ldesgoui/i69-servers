@@ -82,27 +82,6 @@ in
       };
     };
 
-    wireguard = { config, name, ... }: {
-      deployment.keys = {
-        ssh_host_ed25519_key = {
-          keyCommand = [ "age" "-i" "/home/ldesgoui/.ssh/id_ed25519" "-d" "ssh/host-${name}.age" ];
-          destDir = "/etc/ssh";
-        };
-      };
-
-      age.secrets.wg-key.file = "${self}/wg/${name}.age";
-
-      networking.wireguard = {
-        enable = true;
-        interfaces.wg69 = {
-          ips = [ "10.69.0.0/24" ];
-          listenPort = 51820;
-          privateKeyFile = config.age.secrets.wg-key.path;
-          # TODO: peers
-        };
-      };
-    };
-
     mumble = { config, ... }: {
       networking.firewall = {
         allowedTCPPorts = [ config.services.murmur.port ];
