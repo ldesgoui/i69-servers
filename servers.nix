@@ -137,18 +137,18 @@ in
     };
 
     game-1 = {
-      deployment.targetHost = "";
+      deployment.targetHost = "10.10.11.31";
 
       imports = [
         modules.mumble
       ];
     };
 
-    game-2 = { deployment.targetHost = ""; };
-    game-3 = { deployment.targetHost = ""; };
-    game-4 = { deployment.targetHost = ""; };
-    game-5 = { deployment.targetHost = ""; };
-    game-6 = { deployment.targetHost = ""; };
+    game-2 = { deployment.targetHost = "10.10.11.32"; };
+    game-3 = { deployment.targetHost = "10.10.11.33"; };
+    game-4 = { deployment.targetHost = "10.10.11.34"; };
+    game-5 = { deployment.targetHost = "10.10.11.35"; };
+    game-6 = { deployment.targetHost = "10.10.11.36"; };
 
     spec-1 = { config, ... }: {
       deployment = {
