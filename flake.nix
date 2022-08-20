@@ -33,6 +33,7 @@
           systems = [ "x86_64-linux" ];
 
           imports = [
+            ./dns.nix
             ./servers.nix
           ];
 
