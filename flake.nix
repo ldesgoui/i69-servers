@@ -34,7 +34,9 @@
 
           imports = [
             ./dns.nix
+            ./instances.nix
             ./servers.nix
+            ./service.nix
           ];
 
           perSystem = { lib, pkgs, inputs', ... }: {

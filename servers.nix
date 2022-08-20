@@ -134,8 +134,9 @@ in
       services.murmur = {
         enable = true;
         bandwidth = 320000;
-        users = 420;
+        port = 6900;
         registerName = "mumble.i69.lan.tf";
+        users = 420;
       };
     };
   };

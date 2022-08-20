@@ -1,7 +1,8 @@
-{ self, config, lib, ... }:
+{ config, lib, inputs, ... }:
 
 let
-  inherit (self.inputs) dns;
+  inherit (inputs) dns;
+  rootConfig = config;
 in
 {
   options.dns = {
@@ -13,6 +14,7 @@ in
   config.dns.zone."i69.tf" = { config, ... }:
     let
       inherit (dns.lib.combinators) letsEncrypt;
+      cname = target: { CNAME = [ target ]; };
 
       nodes = config.subdomains.nodes.subdomains;
     in
@@ -27,31 +29,34 @@ in
 
       CAA = letsEncrypt "ldesgoui@gmail.com";
 
-      subdomains.nodes.subdomains = {
-        # TODO: source of truth
-        game-1.A = [ "10.10.11.31" ];
-        game-2.A = [ "10.10.11.32" ];
-        game-3.A = [ "10.10.11.33" ];
-        game-4.A = [ "10.10.11.34" ];
-        game-5.A = [ "10.10.11.35" ];
-        game-6.A = [ "10.10.11.36" ];
-        spec-1.A = [ "54.36.190.233" ];
-      };
+      subdomains = {
+        nodes.subdomains = {
+          # TODO: source of truth
+          game-1.A = [ "10.10.11.31" ];
+          game-2.A = [ "10.10.11.32" ];
+          game-3.A = [ "10.10.11.33" ];
+          game-4.A = [ "10.10.11.34" ];
+          game-5.A = [ "10.10.11.35" ];
+          game-6.A = [ "10.10.11.36" ];
+          spec-1.A = [ "54.36.190.233" ];
+        };
 
-      subdomains.mumble.SRV =
-        let
-          f = priority: target: {
-            service = "mumble";
-            proto = "tcp";
-            port = 64738;
-            inherit priority target;
-          };
-        in
-        lib.imap1 f [
-          "game-3.nodes"
-          "game-2.nodes"
-          "game-1.nodes"
-        ];
+        mumble.SRV =
+          let
+            f = priority: target: {
+              service = "mumble";
+              proto = "tcp";
+              port = 6900;
+              inherit priority target;
+            };
+          in
+          lib.imap1 f [
+            "game-3.nodes"
+            "game-2.nodes"
+            "game-1.nodes"
+          ];
+      }
+      // lib.mapAttrs (name: { host, ... }: cname "${host}.nodes") rootConfig.tf2ds.instances;
     };
 
   config.perSystem = { pkgs, system, ... }: {
