@@ -61,7 +61,7 @@ in
     match-19 = { host = "game-6"; port = 6919; stvPort = 6959; };
     match-20 = { host = "game-6"; port = 6920; stvPort = 6960; };
 
-    mge /***/ = { host = "game-1"; port = 6989; stvPort = 6999; };
+    mge /* */ = { host = "game-1"; port = 6989; stvPort = 6999; };
     dm-1 /**/ = { host = "game-1"; port = 6981; stvPort = 6991; };
     dm-2 /**/ = { host = "game-1"; port = 6982; stvPort = 6992; };
     dm-3 /**/ = { host = "game-1"; port = 6983; stvPort = 6993; };
