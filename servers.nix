@@ -12,6 +12,8 @@ in
         };
       };
 
+      age.secrets.wg-key.file = "${self}/wg/${name}.age";
+
       # from modules/profiles/headless.nix
       boot.loader.grub.splashImage = null;
 
@@ -29,6 +31,15 @@ in
         allowedTCPPorts = config.services.openssh.ports;
       };
 
+      networking.wireguard = {
+        enable = true;
+        interfaces.wg69 = {
+          ips = [ "10.69.0.0/24" ];
+          listenPort = 51820;
+          privateKeyFile = config.age.secrets.wg-key.path;
+        };
+      };
+
       programs.command-not-found.enable = false;
 
       services.openssh = {
@@ -42,7 +53,7 @@ in
         }];
       };
 
-      system.stateVersion = "22.11";
+      system.stateVersion = "22.05";
 
       time.timeZone = "Europe/London";
 
@@ -120,6 +131,7 @@ in
       deployment.targetPort = 50022;
 
       imports = [
+        self.inputs.agenix.nixosModules.age
         modules.common
       ]
       ++ lib.optional (lib.hasPrefix "game-" name)
