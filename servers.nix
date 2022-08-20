@@ -67,7 +67,7 @@ in
       };
     };
 
-    game-server = { config, modulesPath, ... }: {
+    game-server = { config, modulesPath, nodes, ... }: {
       imports = [
         "${modulesPath}/virtualisation/proxmox-image.nix"
       ];
@@ -76,6 +76,20 @@ in
         useDHCP = false;
         # cloud-init provides configuration using the "default" interface names
         usePredictableInterfaceNames = false;
+      };
+
+      networking.wireguard.interfaces.wg69 = {
+        # TODO: source of truth
+        peers = [{
+          publicKey = lib.removeSuffix "\n" (builtins.readFile "${self}/wg/spec-1.pub");
+          persistentKeepalive = 25;
+          allowedIPs = [ "10.69.0.101" ];
+          endpoint =
+            let
+              no = nodes.spec-1.config;
+            in
+            "${no.deployment.targetHost}:${toString no.networking.wireguard.interfaces.wg69.listenPort}";
+        }];
       };
 
       # Use cloud-init to set up network interfaces on boot
@@ -100,13 +114,15 @@ in
         device = "/dev/sda1";
       };
 
-      # networking = {
-      #   nat = {
-      #     enable = true;
-      #     externalInterface = "enp0s3";
-      #     internalInterfaces = [ "wg6" ];
-      #   };
-      # };
+      networking.wireguard.interfaces.wg69 = {
+        # TODO: source of truth
+        peers = map
+          (n: {
+            publicKey = lib.removeSuffix "\n" (builtins.readFile "${self}/wg/game-${toString n}.pub");
+            allowedIPs = [ "10.69.0.${toString n}" ];
+          })
+          (lib.range 1 6);
+      };
     };
 
     mumble = { config, ... }: {
