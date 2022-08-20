@@ -5,15 +5,6 @@ in
 {
   flake.nixosModules = {
     common = { config, name, ... }: {
-      deployment.keys = {
-        ssh_host_ed25519_key = {
-          keyCommand = [ "age" "-i" "/home/ldesgoui/.ssh/id_ed25519" "-d" "ssh/host-${name}.age" ];
-          destDir = "/etc/ssh";
-        };
-      };
-
-      age.secrets.wg-key.file = "${self}/wg/${name}.age";
-
       # from modules/profiles/headless.nix
       boot.loader.grub.splashImage = null;
 
@@ -31,21 +22,11 @@ in
         allowedTCPPorts = config.services.openssh.ports;
       };
 
-      networking.wireguard = {
-        enable = true;
-        interfaces.wg69 = {
-          ips = [ "10.69.0.0/24" ];
-          listenPort = 51820;
-          privateKeyFile = config.age.secrets.wg-key.path;
-        };
-      };
-
       programs.command-not-found.enable = false;
 
       services.openssh = {
         enable = true;
         passwordAuthentication = false;
-        ports = [ config.deployment.targetPort ];
 
         hostKeys = [{
           type = "ed25519";
@@ -78,20 +59,6 @@ in
         usePredictableInterfaceNames = false;
       };
 
-      networking.wireguard.interfaces.wg69 = {
-        # TODO: source of truth
-        peers = [{
-          publicKey = lib.removeSuffix "\n" (builtins.readFile "${self}/wg/spec-1.pub");
-          persistentKeepalive = 25;
-          allowedIPs = [ "10.69.0.101" ];
-          endpoint =
-            let
-              no = nodes.spec-1.config;
-            in
-            "${no.deployment.targetHost}:${toString no.networking.wireguard.interfaces.wg69.listenPort}";
-        }];
-      };
-
       # Use cloud-init to set up network interfaces on boot
       services.cloud-init = {
         enable = true;
@@ -113,15 +80,26 @@ in
         fsType = "ext4";
         device = "/dev/sda1";
       };
+    };
 
-      networking.wireguard.interfaces.wg69 = {
-        # TODO: source of truth
-        peers = map
-          (n: {
-            publicKey = lib.removeSuffix "\n" (builtins.readFile "${self}/wg/game-${toString n}.pub");
-            allowedIPs = [ "10.69.0.${toString n}" ];
-          })
-          (lib.range 1 6);
+    wireguard = { config, name, ... }: {
+      deployment.keys = {
+        ssh_host_ed25519_key = {
+          keyCommand = [ "age" "-i" "/home/ldesgoui/.ssh/id_ed25519" "-d" "ssh/host-${name}.age" ];
+          destDir = "/etc/ssh";
+        };
+      };
+
+      age.secrets.wg-key.file = "${self}/wg/${name}.age";
+
+      networking.wireguard = {
+        enable = true;
+        interfaces.wg69 = {
+          ips = [ "10.69.0.0/24" ];
+          listenPort = 51820;
+          privateKeyFile = config.age.secrets.wg-key.path;
+          # TODO: peers
+        };
       };
     };
 
@@ -148,8 +126,9 @@ in
       deployment.targetPort = 50022;
 
       imports = [
-        self.inputs.agenix.nixosModules.age
         modules.common
+        modules.wireguard
+        self.inputs.agenix.nixosModules.age
       ]
       ++ lib.optional (lib.hasPrefix "game-" name)
         modules.game-server;
@@ -171,12 +150,17 @@ in
     game-5 = { deployment.targetHost = ""; };
     game-6 = { deployment.targetHost = ""; };
 
-    spec-1 = {
-      deployment.targetHost = "54.36.190.233";
+    spec-1 = { config, ... }: {
+      deployment = {
+        targetHost = "54.36.190.233";
+        targetPort = 50022;
+      };
 
       imports = [
         modules.ovh-vps
       ];
+
+      services.openssh.ports = [ config.deployment.targetPort ];
     };
   };
 }

@@ -53,6 +53,7 @@
               let
                 nixos = pkgs.nixos {
                   imports = [
+                    rootConfig.flake.nixosModules.common
                     rootConfig.flake.nixosModules.game-server
                   ];
 
