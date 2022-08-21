@@ -77,6 +77,8 @@
                 inputs'.agenix-cli.packages.agenix-cli
 
                 pkgs.knot-dns
+
+                pkgs.rcon
               ];
             };
           };

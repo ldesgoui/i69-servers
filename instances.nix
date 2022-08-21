@@ -3,10 +3,18 @@ let
   inherit (lib) mkOption types;
 
   cfg = config.tf2ds.instances;
+  wg-peers = config.wireguard-peers;
 
+  # TODO
   relay = match: {
     host = "spec-1";
     inherit (match) port stvPort;
+    restartIfChanged = true;
+    args.commands = [
+      "rcon_password ok"
+      "password tv"
+      "tv_relay ${wg-peers.${match.host}.ip}:${toString match.stvPort}"
+    ];
   };
 in
 {
@@ -23,6 +31,21 @@ in
 
         stvPort = mkOption {
           type = types.port;
+        };
+
+        restartIfChanged = mkOption {
+          type = types.bool;
+          default = false;
+        };
+
+        args = mkOption {
+          type = types.raw;
+          default = {
+            commands = [
+              "sv_pure 1"
+              "map itemtest"
+            ];
+          };
         };
       };
     });
@@ -61,13 +84,14 @@ in
     match-19 = { host = "game-6"; port = 6919; stvPort = 6959; };
     match-20 = { host = "game-6"; port = 6920; stvPort = 6960; };
 
-    mge /* */ = { host = "game-1"; port = 6989; stvPort = 6999; };
-    dm-1 /**/ = { host = "game-1"; port = 6981; stvPort = 6991; };
-    dm-2 /**/ = { host = "game-1"; port = 6982; stvPort = 6992; };
-    dm-3 /**/ = { host = "game-1"; port = 6983; stvPort = 6993; };
+    mge /* */ = { host = "game-1"; port = 6989; stvPort = 6999; restartIfChanged = true; };
+    dm-1 /**/ = { host = "game-1"; port = 6981; stvPort = 6991; restartIfChanged = true; };
+    dm-2 /**/ = { host = "game-1"; port = 6982; stvPort = 6992; restartIfChanged = true; };
+    dm-3 /**/ = { host = "game-1"; port = 6983; stvPort = 6993; restartIfChanged = true; };
 
+    # TODO
     relay-01 = relay cfg.match-01;
-    # relay-02 = relay cfg.match-02;
+    relay-02 = relay cfg.match-02;
     # relay-03 = relay cfg.match-03;
     # relay-04 = relay cfg.match-04;
     # relay-05 = relay cfg.match-05;

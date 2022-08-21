@@ -1,6 +1,14 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
-  rootConfig = config;
+  packages = config.flake.packages.x86_64-linux;
+
+  # TODO: dry
+  toArgs = args @ { commands ? [ ], ... }:
+    lib.escapeShellArgs
+      (lib.cli.toGNUCommandLine
+        { mkOptionName = k: "-${k}"; }
+        (builtins.removeAttrs args [ "commands" ])
+      ++ (map (c: "+${c}") commands));
 in
 {
   flake.nixosModules = {
@@ -13,73 +21,81 @@ in
 
         cfg = config.services.tf2ds;
 
-        perInstance = name: opts: {
-          systemd.services."tf2ds-${name}" = {
-            description = "Team Fortress 2 Dedicated Server - ${name}";
-            after = [ "network.target" ];
-            wantedBy = [ "multi-user.target" ];
+        mkService = name: opts:
+          let
+            args = {
+              game = "tf";
+              ip = "0.0.0.0";
+              scriptportbind = true;
+              inherit (opts) port;
+            }
+            // opts.args
+            // {
+              commands = [
+                "tv_port ${toString opts.stvPort}"
+                "clientport ${toString (50000 + opts.port)}"
+              ]
+              ++ opts.args.commands;
+            };
+          in
+          {
+            "tf2ds-${name}" = {
+              description = "Team Fortress 2 Dedicated Server - ${name}";
+              after = [ "network.target" ];
+              wantedBy = [ "multi-user.target" ];
 
-            inherit (opts) restartIfChanged;
+              inherit (opts) restartIfChanged;
 
-            preStart = ''
-              mkdir -p {tf/addons,.steam/sdk32}
-              ${pkgs.findutils}/bin/find . -type l -delete
+              preStart = ''
+                mkdir -p {tf/addons,.steam/sdk32}
+                ${pkgs.findutils}/bin/find . -type l -delete
 
-              ln -fns ${rootConfig.packages.gameinfo} tf/gameinfo.txt
-              ln -fns ${rootConfig.packages.tf2ds}/bin/steamclient.so .steam/sdk32/
+                ln -fns ${packages.gameinfo} tf/gameinfo.txt
+                ln -fns ${packages.tf2ds}/bin/steamclient.so .steam/sdk32/
 
-              ${lib.getExe pkgs.xorg.lndir} -silent ${rootConfig.packages.all-plugins} ./
-            '';
+                ${lib.getExe pkgs.xorg.lndir} -silent ${packages.all-plugins} ./
+              '';
 
-            script = ''
-              HOME=$STATE_DIRECTORY \
-              LD_LIBRARY_PATH=${rootConfig.packages.tf2ds}/bin:${pkgs.pkgsi686Linux.ncurses5}/lib \
-              exec -a "$STATE_DIRECTORY"/srcds_linux \
-                ${rootConfig.packages.tf2ds}/srcds_linux \
-                  ${rootConfig.tf2ds.lib.toArgs {
-                    game = "tf";
-                    ip = "0.0.0.0";
-                    maxplayers = 24;
-                    commands = [
-                      "sv_pure 2"
-                      "map itemtest"
-                    ];
-                    # TODO password, rcon
-                    # TODO port, stvport, clientport, strictportbind
-                    # TODO tv_enable, tv_password
-                  }}
-            '';
+              script = ''
+                HOME=$STATE_DIRECTORY \
+                LD_LIBRARY_PATH=${packages.tf2ds}/bin:${pkgs.pkgsi686Linux.ncurses5}/lib \
+                exec -a "$STATE_DIRECTORY"/srcds_linux \
+                  ${packages.tf2ds}/srcds_linux \
+                    ${toArgs args}
+              '';
 
-            serviceConfig = {
-              Restart = "always";
+              serviceConfig = {
+                Restart = "always";
 
-              DynamicUser = "true";
-              StateDirectory = "tf2ds/${name}";
-              WorkingDirectory = "%S/tf2ds/${name}";
+                DynamicUser = "true";
+                StateDirectory = "tf2ds/${name}";
+                WorkingDirectory = "%S/tf2ds/${name}";
+              };
             };
           };
-
-          networking.firewall = {
-            allowedTCPPorts = [ opts.port ];
-            allowedUDPPorts = [ opts.port opts.stvPort ];
-          };
-        };
       in
       {
         options.services.tf2ds = {
-          enabled = mkOption {
-            type = types.boolean;
-            default = true;
-          };
-
           instances = mkOption {
             type = types.attrsOf (types.submodule {
-              options.port = mkOption { type = types.port; };
-              options.stvPort = mkOption { type = types.port; };
+              options = {
+                port = mkOption { type = types.port; };
+                stvPort = mkOption { type = types.port; };
 
-              options.restartIfChanged = mkOption {
-                type = types.boolean;
-                default = false;
+                restartIfChanged = mkOption {
+                  type = types.bool;
+                  default = false;
+                };
+
+                args = mkOption {
+                  type = types.raw;
+                  default = {
+                    commands = [
+                      "sv_pure 1"
+                      "map itemtest"
+                    ];
+                  };
+                };
               };
             });
 
@@ -87,18 +103,18 @@ in
           };
         };
 
-        config = lib.mkIf cfg.enabled (lib.mkMerge (
-          lib.mapAttrsToList perInstance cfg.instances
-        ));
-      };
+        config.systemd.services = lib.mkMerge (
+          lib.mapAttrsToList mkService cfg.instances
+        );
 
-    tf2ds-matches = {
-      services.tf2ds.instances = {
-        match-1 = { port = 6901; stvPort = 6906; };
-        match-2 = { port = 6902; stvPort = 6907; };
-        match-3 = { port = 6903; stvPort = 6908; };
-        match-4 = { port = 6904; stvPort = 6909; };
+        config.networking.firewall = lib.mkMerge (
+          lib.mapAttrsToList
+            (_: opts: {
+              allowedTCPPorts = [ opts.port ];
+              allowedUDPPorts = [ opts.port opts.stvPort ];
+            })
+            cfg.instances
+        );
       };
-    };
   };
 }

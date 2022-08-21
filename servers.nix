@@ -1,5 +1,6 @@
 { config, lib, self, inputs, ... }:
 let
+  rootConfig = config;
   modules = config.flake.nixosModules;
 in
 {
@@ -106,6 +107,7 @@ in
 
       imports = [
         modules.common
+        modules.tf2ds
         modules.wireguard
         self.inputs.agenix.nixosModules.age
       ]
@@ -113,6 +115,10 @@ in
         modules.game-server;
 
       networking.hostName = name;
+
+      services.tf2ds.instances =
+        builtins.mapAttrs (_: i: removeAttrs i [ "host" ])
+          (lib.filterAttrs (_: i: i.host == name) rootConfig.tf2ds.instances);
     };
 
     game-1 = {
