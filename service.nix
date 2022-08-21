@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, self, ... }:
 let
   packages = config.flake.packages.x86_64-linux;
 
@@ -47,11 +47,12 @@ in
               inherit (opts) restartIfChanged;
 
               preStart = ''
-                mkdir -p {tf/addons,.steam/sdk32}
+                mkdir -p tf/{addons,cfg} .steam/sdk32
                 ${pkgs.findutils}/bin/find . -type l -delete
 
                 ln -fns ${packages.gameinfo} tf/gameinfo.txt
                 ln -fns ${packages.tf2ds}/bin/steamclient.so .steam/sdk32/
+                ln -fns ${config.age.secrets."apikeys.cfg".path} tf/cfg/
 
                 ${lib.getExe pkgs.xorg.lndir} -silent ${packages.all-plugins} ./
               '';
@@ -103,18 +104,22 @@ in
           };
         };
 
-        config.systemd.services = lib.mkMerge (
-          lib.mapAttrsToList mkService cfg.instances
-        );
+        config = {
+          age.secrets."apikeys.cfg".file = "${self}/cfg/apikeys.cfg.age";
 
-        config.networking.firewall = lib.mkMerge (
-          lib.mapAttrsToList
-            (_: opts: {
-              allowedTCPPorts = [ opts.port ];
-              allowedUDPPorts = [ opts.port opts.stvPort ];
-            })
-            cfg.instances
-        );
+          systemd.services = lib.mkMerge (
+            lib.mapAttrsToList mkService cfg.instances
+          );
+
+          networking.firewall = lib.mkMerge (
+            lib.mapAttrsToList
+              (_: opts: {
+                allowedTCPPorts = [ opts.port ];
+                allowedUDPPorts = [ opts.port opts.stvPort ];
+              })
+              cfg.instances
+          );
+        };
       };
   };
 }

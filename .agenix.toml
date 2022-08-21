@@ -40,3 +40,17 @@ identities = ["root", "ldesgoui", "game-6"]
 [[paths]]
 glob = "wg/spec-1.age"
 identities = ["root", "ldesgoui", "spec-1"]
+
+[[paths]]
+glob = "cfg/*.age"
+identities = [
+    "root",
+    "ldesgoui",
+    "game-1",
+    "game-2",
+    "game-3",
+    "game-4",
+    "game-5",
+    "game-6",
+    "spec-1",
+]
