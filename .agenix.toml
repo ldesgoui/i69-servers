@@ -1,5 +1,6 @@
 [identities]
-root = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK25ea20daUVvmTPmUL1nF/0DXEz/7tPBXOSerQNTf6+"
+root = "age1xzkgqkethzqdkxck5dyykzgx8n6y8wmy96d3jm77jzgw9g9yx4kqppzfg2"
+ldesgoui = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK25ea20daUVvmTPmUL1nF/0DXEz/7tPBXOSerQNTf6+"
 game-1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOyjEJkNPVB5BZZfxg5PqZ5MXl/8ZJUQNrm/Vm9LoOlg"
 game-2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGSLF7G4nFiRqymYjkkN3QLctcNxDh+W8lgF9sgkFxXx"
 game-3 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB3JhQ+BhEpDh21OTGC/7RsXoidnQDVi3qHpkpSgWu1y"
@@ -9,29 +10,33 @@ game-6 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBFzbjzs9pAEJDlSN4O4Gip7gKVHSb8oJe
 spec-1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK93/t8Q3v3WrJ2eeZfsz2dXhK1SQFdGcEX1oEciaeH4"
 
 [[paths]]
+glob = "ssh/*.age"
+identities = ["root", "ldesgoui"]
+
+[[paths]]
 glob = "wg/game-1.age"
-identities = ["root", "game-1"]
+identities = ["root", "ldesgoui", "game-1"]
 
 [[paths]]
 glob = "wg/game-2.age"
-identities = ["root", "game-2"]
+identities = ["root", "ldesgoui", "game-2"]
 
 [[paths]]
 glob = "wg/game-3.age"
-identities = ["root", "game-3"]
+identities = ["root", "ldesgoui", "game-3"]
 
 [[paths]]
 glob = "wg/game-4.age"
-identities = ["root", "game-4"]
+identities = ["root", "ldesgoui", "game-4"]
 
 [[paths]]
 glob = "wg/game-5.age"
-identities = ["root", "game-5"]
+identities = ["root", "ldesgoui", "game-5"]
 
 [[paths]]
 glob = "wg/game-6.age"
-identities = ["root", "game-6"]
+identities = ["root", "ldesgoui", "game-6"]
 
 [[paths]]
 glob = "wg/spec-1.age"
-identities = ["root", "spec-1"]
+identities = ["root", "ldesgoui", "spec-1"]

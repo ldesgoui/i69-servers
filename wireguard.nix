@@ -47,7 +47,7 @@ in
     };
   };
 
-  config.flake.nixosModules.wireguard = { config, name, ... }:
+  config.flake.nixosModules.wireguard = { config, pkgs, name, ... }:
     let
       peers = rootConfig.wireguard-peers;
       not-me = lib.filterAttrs (n: _: name != n) peers;
@@ -55,8 +55,15 @@ in
     {
       deployment.keys = {
         ssh_host_ed25519_key = {
-          keyCommand = [ "age" "-i" "/home/ldesgoui/.ssh/id_ed25519" "-d" "ssh/host-${name}.age" ];
+          keyCommand = [ (lib.getExe pkgs.rage) "-i" "${self}/root.age" "-d" "${self}/ssh/host-${name}.age" ];
           destDir = "/etc/ssh";
+          uploadAt = "post-activation";
+        };
+
+        "ssh_host_ed25519_key.pub" = {
+          keyFile = "${self}/ssh/host-${name}.pub";
+          destDir = "/etc/ssh";
+          uploadAt = "post-activation";
         };
       };
 
