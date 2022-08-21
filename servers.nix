@@ -103,7 +103,9 @@ in
     meta.nixpkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
 
     defaults = { name, ... }: {
-      deployment.targetPort = 50022;
+      deployment = {
+        allowLocalDeployment = true;
+      };
 
       imports = [
         modules.common
