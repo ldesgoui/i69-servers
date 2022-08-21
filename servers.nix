@@ -147,6 +147,8 @@ in
         modules.ovh-vps
       ];
 
+      networking.firewall.logRefusedConnections = false;
+
       services.openssh.ports = [ config.deployment.targetPort ];
     };
   };
