@@ -155,8 +155,8 @@
       }
       ''
         mkdir -p $out/tf/{addons,maps}
-        cp -r $src/addons $out/tf/addons
-        cp -r $src/maps $out/tf/maps
+        cp -r $src/addons/. $out/tf/addons
+        cp -r $src/maps/. $out/tf/maps
       '';
 
     demostf = pkgs.runCommand "demostf"
