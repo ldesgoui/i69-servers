@@ -4,18 +4,6 @@ let
 
   cfg = config.tf2ds.instances;
   wg-peers = config.wireguard-peers;
-
-  # TODO
-  relay = match: {
-    host = "spec-1";
-    inherit (match) port stvPort;
-    restartIfChanged = true;
-    args.commands = [
-      "rcon_password ok"
-      "password tv"
-      "tv_relay ${wg-peers.${match.host}.ip}:${toString match.stvPort}"
-    ];
-  };
 in
 {
   options.tf2ds.instances = mkOption {
@@ -84,31 +72,13 @@ in
     match-19 = { host = "game-6"; port = 6919; stvPort = 6959; };
     match-20 = { host = "game-6"; port = 6920; stvPort = 6960; };
 
-    mge /* */ = { host = "game-1"; port = 6989; stvPort = 6999; restartIfChanged = true; };
-    dm-1 /**/ = { host = "game-1"; port = 6981; stvPort = 6991; restartIfChanged = true; };
-    dm-2 /**/ = { host = "game-1"; port = 6982; stvPort = 6992; restartIfChanged = true; };
-    dm-3 /**/ = { host = "game-1"; port = 6983; stvPort = 6993; restartIfChanged = true; };
+    dm-1 = { host = "game-1"; port = 6981; stvPort = 6991; restartIfChanged = true; };
+    dm-2 = { host = "game-1"; port = 6982; stvPort = 6992; restartIfChanged = true; };
+    dm-3 = { host = "game-1"; port = 6983; stvPort = 6993; restartIfChanged = true; };
 
-    # TODO
-    relay-01 = relay cfg.match-01;
-    relay-02 = relay cfg.match-02;
-    # relay-03 = relay cfg.match-03;
-    # relay-04 = relay cfg.match-04;
-    # relay-05 = relay cfg.match-05;
-    # relay-06 = relay cfg.match-06;
-    # relay-07 = relay cfg.match-07;
-    # relay-08 = relay cfg.match-08;
-    # relay-09 = relay cfg.match-09;
-    # relay-10 = relay cfg.match-10;
-    # relay-11 = relay cfg.match-11;
-    # relay-12 = relay cfg.match-12;
-    # relay-13 = relay cfg.match-13;
-    # relay-14 = relay cfg.match-14;
-    # relay-15 = relay cfg.match-15;
-    # relay-16 = relay cfg.match-16;
-    # relay-17 = relay cfg.match-17;
-    # relay-18 = relay cfg.match-18;
-    # relay-19 = relay cfg.match-19;
-    # relay-20 = relay cfg.match-20;
+    mge = { host = "game-1"; port = 6989; stvPort = 6999; restartIfChanged = true; };
+
+    relay-1 = { host = "spec-1"; port = 6901; stvPort = 6941; args.commands = [ ]; };
+    relay-2 = { host = "spec-1"; port = 6902; stvPort = 6942; args.commands = [ ]; };
   };
 }
