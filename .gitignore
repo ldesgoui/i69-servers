@@ -3,3 +3,7 @@ tf2ds
 # Nix
 result
 result-*
+
+# Age-decrypted
+/passwords.json
+/cfg/apikeys.cfg

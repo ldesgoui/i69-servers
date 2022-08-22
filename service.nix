@@ -54,6 +54,10 @@ in
                 ln -fns ${packages.tf2ds}/bin/steamclient.so .steam/sdk32/
                 ln -fns ${config.age.secrets."apikeys.cfg".path} tf/cfg/
 
+                ${lib.getExe pkgs.jq} -r --arg name "${name}" '
+                  .[$name] | to_entries[] | "\(.key) \"\(.value)\""
+                ' ${config.age.secrets."passwords.json".path} > tf/cfg/passwords.cfg
+
                 ${lib.getExe pkgs.xorg.lndir} -silent ${packages.all-plugins} ./
               '';
 
@@ -69,6 +73,7 @@ in
                 Restart = "always";
 
                 DynamicUser = "true";
+                SupplementaryGroups = "tf2ds";
                 StateDirectory = "tf2ds/${name}";
                 WorkingDirectory = "%S/tf2ds/${name}";
               };
@@ -105,11 +110,19 @@ in
         };
 
         config = {
-          age.secrets."apikeys.cfg".file = "${self}/cfg/apikeys.cfg.age";
+          age.secrets = {
+            "apikeys.cfg" = {
+              file = "${self}/cfg/apikeys.cfg.age";
+              mode = "0440";
+              group = "tf2ds";
+            };
 
-          systemd.services = lib.mkMerge (
-            lib.mapAttrsToList mkService cfg.instances
-          );
+            "passwords.json" = {
+              file = "${self}/passwords.json.age";
+              mode = "0440";
+              group = "tf2ds";
+            };
+          };
 
           networking.firewall = lib.mkMerge (
             lib.mapAttrsToList
@@ -119,6 +132,12 @@ in
               })
               cfg.instances
           );
+
+          systemd.services = lib.mkMerge (
+            lib.mapAttrsToList mkService cfg.instances
+          );
+
+          users.groups.tf2ds = { };
         };
       };
   };

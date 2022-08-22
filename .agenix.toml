@@ -9,43 +9,9 @@ game-5 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICtqfrDG42rHKFLTXLFi/2AygpZuCqTdHf
 game-6 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBFzbjzs9pAEJDlSN4O4Gip7gKVHSb8oJengNelOUfsH"
 spec-1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK93/t8Q3v3WrJ2eeZfsz2dXhK1SQFdGcEX1oEciaeH4"
 
-[[paths]]
-glob = "ssh/*.age"
-identities = ["root", "ldesgoui"]
-
-[[paths]]
-glob = "wg/game-1.age"
-identities = ["root", "ldesgoui", "game-1"]
-
-[[paths]]
-glob = "wg/game-2.age"
-identities = ["root", "ldesgoui", "game-2"]
-
-[[paths]]
-glob = "wg/game-3.age"
-identities = ["root", "ldesgoui", "game-3"]
-
-[[paths]]
-glob = "wg/game-4.age"
-identities = ["root", "ldesgoui", "game-4"]
-
-[[paths]]
-glob = "wg/game-5.age"
-identities = ["root", "ldesgoui", "game-5"]
-
-[[paths]]
-glob = "wg/game-6.age"
-identities = ["root", "ldesgoui", "game-6"]
-
-[[paths]]
-glob = "wg/spec-1.age"
-identities = ["root", "ldesgoui", "spec-1"]
-
-[[paths]]
-glob = "cfg/*.age"
-identities = [
-    "root",
-    "ldesgoui",
+[groups]
+admins = ["root", "ldesgoui"]
+servers = [
     "game-1",
     "game-2",
     "game-3",
@@ -54,3 +20,50 @@ identities = [
     "game-6",
     "spec-1",
 ]
+
+[[paths]]
+glob = "ssh/*.age"
+groups = ["admins"]
+
+[[paths]]
+glob = "wg/game-1.age"
+groups = ["admins"]
+identities = ["game-1"]
+
+[[paths]]
+glob = "wg/game-2.age"
+groups = ["admins"]
+identities = ["game-2"]
+
+[[paths]]
+glob = "wg/game-3.age"
+groups = ["admins"]
+identities = ["game-3"]
+
+[[paths]]
+glob = "wg/game-4.age"
+groups = ["admins"]
+identities = ["game-4"]
+
+[[paths]]
+glob = "wg/game-5.age"
+groups = ["admins"]
+identities = ["game-5"]
+
+[[paths]]
+glob = "wg/game-6.age"
+groups = ["admins"]
+identities = ["game-6"]
+
+[[paths]]
+glob = "wg/spec-1.age"
+groups = ["admins"]
+identities = ["spec-1"]
+
+[[paths]]
+glob = "cfg/*.age"
+groups = ["admins", "servers"]
+
+[[paths]]
+glob = "passwords.json.age"
+groups = ["admins", "servers"]
