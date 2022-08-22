@@ -23,7 +23,7 @@ in
           "connect \(.hostname):\(.port)" + if $pw.sv_password then "; password \($pw.sv_password)" else "" end,
           "connect \(.hostname):\(.stvPort)" + if $pw.tv_password then "; password \($pw.tv_password)" else "" end,
           if $pw.rcon_password then "rcon_address \(.hostname):\(.port); rcon_password \($pw.rcon_password)" else "" end,
-          "rcon tv_relay \(.wg):\(.stvPort)" + if $pw.tv_relaypassword then "; rcon password \($pw.tv_relaypassword)" else "" end
+          "rcon tv_relay \"\(.wg):\(.stvPort)\"" + if $pw.tv_relaypassword then "; rcon password \"\($pw.tv_relaypassword)\"" else "" end
         ] | @csv
       ' ${pkgs.writeText "out.json" (builtins.toJSON out)}
     '';
