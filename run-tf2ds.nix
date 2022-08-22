@@ -38,7 +38,7 @@
         path = ".";
       }
       {
-        keys = [ "game" "game_write" ];
+        keys = [ "mod" "game" "game_write" ];
         path = "tf";
       }
       {
