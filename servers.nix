@@ -84,18 +84,43 @@ in
     };
 
     mumble = { config, ... }: {
+      age.secrets.gandi-creds = {
+        file = "${self}/gandi-creds.age";
+        owner = "acme";
+      };
+
       networking.firewall = {
         allowedTCPPorts = [ config.services.murmur.port ];
         allowedUDPPorts = [ config.services.murmur.port ];
       };
 
-      services.murmur = {
-        enable = true;
-        bandwidth = 320000;
-        port = 6900;
-        registerName = "mumble.i69.lan.tf";
-        users = 420;
+      security.acme = {
+        acceptTerms = true;
+
+        certs."mumble.i69.tf" = {
+          email = "ldesgoui@gmail.com";
+          dnsProvider = "gandiv5";
+          credentialsFile = config.age.secrets.gandi-creds.path;
+          group = "murmur";
+          reloadServices = [ "murmur" ];
+        };
       };
+
+      services.murmur =
+        let
+          certDir = config.security.acme.certs."mumble.i69.tf".directory;
+        in
+        {
+          enable = true;
+          bandwidth = 320000;
+          bonjour = true;
+          port = 6900;
+          registerName = "mumble.i69.tf";
+          users = 420;
+
+          sslCert = "${certDir}/cert.pem";
+          sslKey = "${certDir}/key.pem";
+        };
     };
   };
 

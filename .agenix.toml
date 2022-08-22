@@ -67,3 +67,8 @@ groups = ["admins", "servers"]
 [[paths]]
 glob = "passwords.json.age"
 groups = ["admins", "servers"]
+
+[[paths]]
+glob = "gandi-creds.age"
+groups = ["admins"]
+identities = ["game-1"]
