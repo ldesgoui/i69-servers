@@ -5,5 +5,8 @@ result
 result-*
 
 # Age-decrypted
-/passwords.json
 /cfg/apikeys.cfg
+/gandi-creds
+/passwords.json
+/root
+/root-password

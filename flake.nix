@@ -32,6 +32,7 @@
 
           imports = [
             ./dns.nix
+            ./export.nix
             ./instances.nix
             ./servers.nix
             ./service.nix
