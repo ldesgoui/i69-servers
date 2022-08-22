@@ -56,7 +56,7 @@ in
             "game-1.nodes"
           ];
       }
-      // lib.mapAttrs (name: { host, ... }: cname "${host}.nodes") rootConfig.tf2ds.instances;
+      // builtins.mapAttrs (name: { host, ... }: cname "${host}.nodes") rootConfig.tf2ds.instances;
     };
 
   config.perSystem = { pkgs, system, ... }: {

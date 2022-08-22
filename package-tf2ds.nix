@@ -121,7 +121,7 @@ in
         (lib.cli.toGNUCommandLine
           { mkOptionName = k: "-${k}"; }
           {
-            inherit (lib.mapAttrs (_: lib.escapeShellArg) chunk) app depot manifest;
+            inherit (builtins.mapAttrs (_: lib.escapeShellArg) chunk) app depot manifest;
             filelist = lib.optional (fileList != null) ''"$fileListPath"'';
             dir = ''"$out"'';
           });

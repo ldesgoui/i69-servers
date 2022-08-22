@@ -63,6 +63,26 @@
         cp -r $src/. $out/tf/cfg
       '';
 
+    maps = pkgs.linkFarm "maps" (
+      lib.mapAttrsToList
+        (name: hash: {
+          name = "tf/maps/${name}.bsp";
+          path = pkgs.fetchurl {
+            url = "https://dl.serveme.tf/maps/${name}.bsp";
+            inherit hash;
+          };
+        })
+        {
+          cp_granary_pro_rc8 = "sha256-C9aOrbrBMarhNVGHov8UMo82dfYWms+wr+wA9M2k4Qc=";
+          cp_gullywash_f9 = "sha256-BgaQbICXVuP0ChFrZtIi7ZKQc/Y2+cOxssXbv5y8mls=";
+          cp_metalworks_f4 = "sha256-Ny0QfDUnbhVyLVyiVdW2y0Yv0OMiMWUDKo4ocdUd6HI=";
+          cp_process_f11 = "sha256-vafHG1dTDTGouu5BlxiStLgD0v+BFHGzfz52YkN+hM4=";
+          cp_snakewater_final1 = "sha256-YX1Ihx65bfyPZECp6O60GpR0Sq/YHfVh5/meEbZ3lXE=";
+          cp_sunshine = "sha256-yprX0B9GESq7xbAvPRRPrYM+ag/zvYKh//OPqNPDJHQ=";
+          koth_product_final = "sha256-82zj1DN3zHhoIcQ+RMzIjulUm3yzDW55PTFhNMa1mwM=";
+        }
+    );
+
     our-configs = pkgs.runCommand "our-configs" { } ''
       mkdir -p $out/tf/cfg
       cp -r ${./cfg}/. $out/tf/cfg
