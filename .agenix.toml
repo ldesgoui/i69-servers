@@ -22,6 +22,10 @@ servers = [
 ]
 
 [[paths]]
+glob = "root-password.age"
+groups = ["admins"]
+
+[[paths]]
 glob = "ssh/*.age"
 groups = ["admins"]
 
