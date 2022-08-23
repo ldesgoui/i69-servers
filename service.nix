@@ -32,6 +32,7 @@ in
             // opts.args
             // {
               commands = [
+                ''hostname "i69.tf - ${name}"''
                 "tv_port ${toString opts.stvPort}"
                 "clientport ${toString (50000 + opts.port)}"
               ]
