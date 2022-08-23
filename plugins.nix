@@ -179,6 +179,66 @@
         cp -r $src/maps/. $out/tf/maps
       '';
 
+    logstf = pkgs.runCommand "logstf"
+      {
+        src = pkgs.fetchzip {
+          url = "http://sourcemod.krus.dk/logstf.zip";
+          sha256 = "sha256-QSwMq8penOKacFb2pvY5kbJ7CWjJPBCYaZUHAahnycY=";
+        };
+      }
+      ''
+        mkdir -p $out/tf/addons/sourcemod/plugins
+        cp -r $src/. $out/tf/addons/sourcemod/plugins/
+      '';
+
+    sup-stats = pkgs.runCommand "supstats2"
+      {
+        src = pkgs.fetchzip {
+          url = "http://sourcemod.krus.dk/supstats2.zip";
+          sha256 = "sha256-Y/lpVP0nV6XWg/scLnk4S1+q5qIOrF3CUmwvGD9vTeE=";
+        };
+      }
+      ''
+        mkdir -p $out/tf/addons/sourcemod/plugins
+        cp -r $src/. $out/tf/addons/sourcemod/plugins/
+      '';
+
+    medic-stats = pkgs.runCommand "medicstats"
+      {
+        src = pkgs.fetchzip {
+          url = "http://sourcemod.krus.dk/medicstats.zip";
+          sha256 = "sha256-hkp07m60AQCDbL8yu0xrTh6mGTCwcehFsSI1F8JSTo0=";
+        };
+      }
+      ''
+        mkdir -p $out/tf/addons/sourcemod/plugins
+        cp -r $src/. $out/tf/addons/sourcemod/plugins/
+      '';
+
+    record-stv = pkgs.runCommand "recordstv"
+      {
+        src = pkgs.fetchzip {
+          url = "http://sourcemod.krus.dk/recordstv.zip";
+          sha256 = "sha256-1flr1F4WydqTdmEzKpIOuEU6uMy19edMIEcQGmrgg2k=";
+        };
+      }
+      ''
+        mkdir -p $out/tf/addons/sourcemod/plugins
+        cp -r $src/. $out/tf/addons/sourcemod/plugins/
+      '';
+
+    afk-detector = pkgs.runCommand "afk"
+      {
+        src = pkgs.fetchzip {
+          url = "http://sourcemod.krus.dk/afk.zip";
+          sha256 = "sha256-PdYX+B/TmAxmQInyQ0EOIZQ0RjO0OkpdlNIfD8cx164=";
+        };
+      }
+      ''
+        mkdir -p $out/tf/addons/sourcemod/plugins
+        cp -r $src/. $out/tf/addons/sourcemod/plugins/
+      '';
+
     demostf = pkgs.runCommand "demostf"
       {
         src = pkgs.fetchurl {
