@@ -53,8 +53,8 @@
     etf2l-configs = pkgs.runCommand "etf2l-configs"
       {
         src = pkgs.fetchzip {
-          url = "https://github.com/ETF2L/gameserver-configs/releases/download/1.0.5/etf2l_configs.zip";
-          sha256 = "sha256-dZyeh9B7EBweQHjswpb7KtRspJ3nmYRQ5ASNPUpZnlo=";
+          url = "https://github.com/ETF2L/gameserver-configs/releases/download/1.0.6/etf2l_configs.zip";
+          sha256 = "sha256-s8td1M9+f0TmEhAgP78ezlr0WNMJ33FLM4XFnLPXN7c=";
           stripRoot = false;
         };
       }
@@ -154,8 +154,8 @@
     soap-dm = pkgs.runCommand "soap-dm"
       {
         src = pkgs.fetchzip {
-          url = "https://github.com/sapphonie/SOAP-TF2DM/releases/download/v4.4.5/soap.zip";
-          sha256 = "sha256-7nk92SAkNAzOg1OaP9Zg61QnHgUpYxBWhyLqFL2Jvac=";
+          url = "https://github.com/sapphonie/SOAP-TF2DM/releases/download/v4.4.6/soap.zip";
+          sha256 = "sha256-ufmKdfRBPWyWa2waWKlg+H2LzkteFQjGOxUEVLHW6nM=";
           stripRoot = false;
         };
       }
