@@ -30,7 +30,7 @@ in
           type = types.raw;
           default = {
             commands = [
-              "sv_pure 1"
+              "sv_pure 2"
               "map itemtest"
             ];
           };
