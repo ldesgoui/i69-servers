@@ -34,11 +34,7 @@
         path = "${config.packages.tf2ds}/tf/bin";
       }
       {
-        keys = [ "mod" "mod_write" "default_write_path" ];
-        path = ".";
-      }
-      {
-        keys = [ "mod" "game" "game_write" ];
+        keys = [ "mod" "game" "mod_write" "game_write" "default_write_path" ];
         path = "tf";
       }
       {
