@@ -64,6 +64,7 @@ in
       services.cloud-init = {
         enable = true;
         network.enable = true;
+        config = builtins.readFile "${self}/cloud.cfg";
       };
     };
 
