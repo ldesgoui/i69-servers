@@ -51,9 +51,9 @@ in
             };
           in
           lib.imap1 f [
-            "game-3.nodes"
-            "game-2.nodes"
             "game-1.nodes"
+            "game-2.nodes"
+            "game-3.nodes"
           ];
       }
       // builtins.mapAttrs (name: { host, ... }: cname "${host}.nodes") rootConfig.tf2ds.instances;
