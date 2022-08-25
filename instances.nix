@@ -8,12 +8,7 @@ let
   dm = {
     port = 27015;
     restartIfChanged = true;
-    args.commands = [
-      "mp_tournament 0"
-      ''alias mp_tournament ""''
-      "mp_timelimit 10"
-      ''alias mp_timelimit ""''
-    ];
+    args.commands = [ "exec dm" ];
   };
 in
 {
@@ -93,13 +88,7 @@ in
       port = 27015;
       stvPort = 6999;
       restartIfChanged = true;
-      args.commands = [
-        "mp_tournament 0"
-        ''alias mp_tournament ""''
-        "mp_timelimit 240"
-        ''alias mp_timelimit ""''
-        "mapcyclefile mge-mapcycle.txt"
-      ];
+      args.commands = [ "exec mge" ];
     };
 
     relay-1 = { host = "spec-1"; port = 6801; stvPort = 6901; args.commands = [ ]; };
