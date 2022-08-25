@@ -8,7 +8,11 @@ let
   dm = {
     port = 27015;
     restartIfChanged = true;
-    args.commands = [ "exec dm" ];
+    args.commands = [
+      "sv_pure 2"
+      "exec dm"
+      "map itemtest"
+    ];
   };
 in
 {
@@ -88,7 +92,11 @@ in
       port = 27015;
       stvPort = 6999;
       restartIfChanged = true;
-      args.commands = [ "exec mge" ];
+      args.commands = [
+        "sv_pure 2"
+        "exec mge"
+        "map itemtest"
+      ];
     };
 
     relay-1 = { host = "spec-1"; port = 6801; stvPort = 6901; args.commands = [ ]; };
