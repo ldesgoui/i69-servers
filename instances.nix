@@ -4,6 +4,17 @@ let
 
   cfg = config.tf2ds.instances;
   wg-peers = config.wireguard-peers;
+
+  dm = {
+    port = 27015;
+    restartIfChanged = true;
+    args.commands = [
+      "mp_tournament 0"
+      ''alias mp_tournament ""''
+      "mp_timelimit 10"
+      ''alias mp_timelimit ""''
+    ];
+  };
 in
 {
   options.tf2ds.instances = mkOption {
@@ -71,13 +82,25 @@ in
     match-17 = { host = "game-6"; port = 6917; stvPort = 6957; };
     match-18 = { host = "game-6"; port = 6918; stvPort = 6958; };
 
-    dm-1 = { host = "game-1"; port = 27015; stvPort = 6991; restartIfChanged = true; };
-    dm-2 = { host = "game-2"; port = 27015; stvPort = 6992; restartIfChanged = true; };
-    dm-3 = { host = "game-3"; port = 27015; stvPort = 6993; restartIfChanged = true; };
-    dm-4 = { host = "game-4"; port = 27015; stvPort = 6994; restartIfChanged = true; };
-    dm-5 = { host = "game-5"; port = 27015; stvPort = 6995; restartIfChanged = true; };
+    dm-1 = { host = "game-1"; stvPort = 6991; } // dm;
+    dm-2 = { host = "game-2"; stvPort = 6992; } // dm;
+    dm-3 = { host = "game-3"; stvPort = 6993; } // dm;
+    dm-4 = { host = "game-4"; stvPort = 6994; } // dm;
+    dm-5 = { host = "game-5"; stvPort = 6995; } // dm;
 
-    mge = { host = "game-6"; port = 27015; stvPort = 6999; restartIfChanged = true; };
+    mge = {
+      host = "game-6";
+      port = 27015;
+      stvPort = 6999;
+      restartIfChanged = true;
+      args.commands = [
+        "mp_tournament 0"
+        ''alias mp_tournament ""''
+        "mp_timelimit 240"
+        ''alias mp_timelimit ""''
+        "mapcyclefile mge-mapcycle.txt"
+      ];
+    };
 
     relay-1 = { host = "spec-1"; port = 6801; stvPort = 6901; args.commands = [ ]; };
     relay-2 = { host = "spec-1"; port = 6802; stvPort = 6902; args.commands = [ ]; };
