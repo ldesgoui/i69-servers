@@ -71,6 +71,8 @@ in
               '';
 
               serviceConfig = {
+                ExecStop = "${lib.getExe pkgs.rcon} -H 127.0.0.1 -p ${opts.port} -P $(${lib.getExe pkgs.jq} -r --arg name "${name}" '.[$name].rcon_password' ${config.age.secrets."passwords.json".path}) 'quit'";
+
                 Restart = "always";
 
                 DynamicUser = "true";
