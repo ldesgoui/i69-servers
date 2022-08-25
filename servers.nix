@@ -134,7 +134,7 @@ in
 
       imports = [
         modules.common
-        modules.tf2ds
+        # modules.tf2ds
         modules.wireguard
         self.inputs.agenix.nixosModules.age
       ]
@@ -143,9 +143,9 @@ in
 
       networking.hostName = name;
 
-      services.tf2ds.instances =
-        builtins.mapAttrs (_: i: removeAttrs i [ "host" ])
-          (lib.filterAttrs (_: i: i.host == name) rootConfig.tf2ds.instances);
+      # services.tf2ds.instances =
+      #   builtins.mapAttrs (_: i: removeAttrs i [ "host" ])
+      #     (lib.filterAttrs (_: i: i.host == name) rootConfig.tf2ds.instances);
     };
 
     game-1 = {
