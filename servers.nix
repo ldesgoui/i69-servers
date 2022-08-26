@@ -134,9 +134,9 @@ in
       };
 
       imports = [
+        modules.age
         modules.common
         modules.tf2ds
-        modules.wireguard
         self.inputs.agenix.nixosModules.age
       ]
       ++ lib.optional (lib.hasPrefix "game-" name)
@@ -163,7 +163,7 @@ in
     game-5 = { deployment.targetHost = "10.10.11.35"; };
     game-6 = { deployment.targetHost = "10.10.11.36"; };
 
-    spec-1 = { config, ... }: {
+    spec-1 = { config, name, ... }: {
       deployment = {
         targetHost = "54.36.190.233";
         targetPort = 50022;
@@ -176,6 +176,22 @@ in
       networking.firewall.logRefusedConnections = false;
 
       services.openssh.ports = [ config.deployment.targetPort ];
+
+      age.secrets.wg-key.file = "${self}/wg/${name}.age";
+
+      networking.wireguard = {
+        enable = true;
+        interfaces.wg0 = {
+          ips = [ "10.10.22.4/24" "fd00::10:97:4/112" ];
+          privateKeyFile = config.age.secrets.wg-key.path;
+          peers = [{
+            publicKey = "fhEMM8Q5HtQOHIVBQHLZfiEs7Lw9KWxRZA21uCuPVxI=";
+            persistentKeepalive = 25;
+            allowedIPs = [ "10.10.11.0/24" ];
+            endpoint = "game-vpn.as47671.net:51820";
+          }];
+        };
+      };
     };
   };
 }

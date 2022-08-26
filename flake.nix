@@ -31,12 +31,12 @@
           systems = [ "x86_64-linux" ];
 
           imports = [
+            ./age.nix
             ./dns.nix
             ./export.nix
             ./instances.nix
             ./servers.nix
             ./service.nix
-            ./wireguard.nix
           ];
 
           perSystem = { lib, pkgs, inputs', ... }: {
