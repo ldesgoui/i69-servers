@@ -6,7 +6,6 @@ let
         inherit name;
         inherit (opts) host port stvPort;
         hostname = "${name}.i69.tf";
-        wg = config.wireguard-peers.${host}.ip;
       }))
       (lib.partition (x: lib.hasPrefix "match-" x.name))
       (xs: xs.right ++ xs.wrong)
@@ -26,7 +25,7 @@ in
           "connect \(.hostname):\(.stvPort)"
             + if $pw.tv_password then "; password \($pw.tv_password)" else "" end,
           if $pw.rcon_password then "rcon_address \(.hostname):\(.port); rcon_password \($pw.rcon_password)" else "" end,
-          "rcon tv_relay \"\(.wg):\(.stvPort)\"" + if $pw.tv_relaypassword then "; rcon password \"\($pw.tv_relaypassword)\"" else "" end
+          "rcon tv_relay \"\(.hostname):\(.stvPort)\"" + if $pw.tv_relaypassword then "; rcon password \"\($pw.tv_relaypassword)\"" else "" end
         ] | @csv
       ' ${pkgs.writeText "out.json" (builtins.toJSON out)}
     '';
