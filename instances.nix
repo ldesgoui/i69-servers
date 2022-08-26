@@ -7,6 +7,7 @@ let
   dm = {
     port = 27015;
     restartIfChanged = true;
+    args.maxplayers = 8;
     args.commands = [
       "sv_pure 2"
       "exec dm"
