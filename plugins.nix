@@ -256,6 +256,18 @@
         cp $src/roundtimer_override.smx $out/tf/addons/sourcemod/plugins/
       '';
 
+    classrestrict = pkgs.runCommand "classrestrict"
+      {
+        src = pkgs.fetchurl {
+          url = "https://www.sourcemod.net/vbcompiler.php?file_id=27957";
+          sha256 = "sha256-vOg/73yA9m8NGhAkM6691SAdjvLj5epEQtH+MPhJOOk=";
+        };
+      }
+      ''
+        mkdir -p $out/tf/addons/sourcemod/plugins
+        cp $src $out/tf/addons/sourcemod/plugins/classrestrict.smx
+      '';
+
     # This is fine.
     maps = pkgs.linkFarm "maps" (
       lib.mapAttrsToList
@@ -276,6 +288,12 @@
           koth_product_final = "sha256-82zj1DN3zHhoIcQ+RMzIjulUm3yzDW55PTFhNMa1mwM=";
         }
     );
+
+    hilarity-ensues = pkgs.runCommand "itemtest-aliases" { } ''
+      mkdir -p $out/tf/maps
+
+      ln -s ${config.packages.tf2ds}/tf/maps/itemtest.bsp $out/tf/maps/itemtest_dm.bsp
+    '';
   };
 
   config.packages = {

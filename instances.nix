@@ -10,7 +10,7 @@ let
     args.commands = [
       "sv_pure 2"
       "exec dm"
-      "map itemtest"
+      "map itemtest_dm"
     ];
   };
 in
