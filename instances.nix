@@ -3,7 +3,6 @@ let
   inherit (lib) mkOption types;
 
   cfg = config.tf2ds.instances;
-  wg-peers = config.wireguard-peers;
 
   dm = {
     port = 27015;
@@ -77,7 +76,7 @@ in
     match-14 = { host = "game-5"; port = 6914; stvPort = 6954; };
     match-15 = { host = "game-5"; port = 6915; stvPort = 6955; };
 
-    match-16 = { host = "game-6"; port = 6917; stvPort = 6956; };
+    match-16 = { host = "game-6"; port = 6916; stvPort = 6956; };
     match-17 = { host = "game-6"; port = 6917; stvPort = 6957; };
     match-18 = { host = "game-6"; port = 6918; stvPort = 6958; };
 
