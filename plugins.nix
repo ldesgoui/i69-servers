@@ -98,13 +98,13 @@
     steamworks = pkgs.runCommand "steamworks"
       {
         src = pkgs.fetchzip {
-          url = "https://github.com/KyleSanderson/SteamWorks/releases/download/1.2.3c/package-lin.tgz";
-          sha256 = "sha256-/q7JMSrzCL77qn/q2zcqtNZem5Z0hRsHtK6UynXSxr4=";
+          url = "https://github.com/hexa-core-eu/SteamWorks/releases/download/v1.2.3/package-linux.zip";
+          sha256 = "sha256-7QhhnbAUorR5y47BJAo9Eey3R290biKZfwYpwe78BV0=";
         };
       }
       ''
         mkdir -p $out/tf
-        cp -r $src/. $out/tf/
+        cp -r $src/package/addons $out/tf/
       '';
 
     curl = pkgs.runCommand "curl"
