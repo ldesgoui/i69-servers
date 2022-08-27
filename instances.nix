@@ -70,7 +70,7 @@ in
     match-09 = { host = "game-3"; port = 6909; stvPort = 6949; };
 
     match-10 = { host = "game-4"; port = 6910; stvPort = 6950; };
-    match-11 = { host = "game-4"; port = 6911; stvPort = 6951; };
+    # match-11 = { host = "game-4"; port = 6911; stvPort = 6951; };
     match-12 = { host = "game-4"; port = 6912; stvPort = 6952; };
 
     match-13 = { host = "game-5"; port = 6913; stvPort = 6953; };
