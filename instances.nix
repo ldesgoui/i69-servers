@@ -91,7 +91,7 @@ in
       host = "game-6";
       port = 27015;
       stvPort = 6999;
-      restartIfChanged = true;
+      # restartIfChanged = true;
       args.commands = [
         "sv_pure 2"
         "exec mge"

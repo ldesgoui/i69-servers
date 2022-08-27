@@ -256,6 +256,18 @@
         cp $src $out/tf/addons/sourcemod/plugins/classrestrict.smx
       '';
 
+    pause = pkgs.runCommand "updated-pause-plugin"
+      {
+        src = pkgs.fetchzip {
+          url = "https://github.com/l-Aad-l/updated-pause-plugin/releases/download/v1.4.2/updated-pause-plugin.zip";
+          sha256 = "sha256-Qt57PcJgxmh88ZlTDeXOqSwTM2BHXrCQph1K3e4Ewow=";
+        };
+      }
+      ''
+        mkdir -p $out/tf/addons
+        cp -r $src/. $out/tf/addons/
+      '';
+
     # This is fine.
     maps = pkgs.linkFarm "maps" (
       lib.mapAttrsToList
