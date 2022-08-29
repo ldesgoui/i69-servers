@@ -192,6 +192,17 @@ in
           }];
         };
       };
+
+      users.users.root = {
+        openssh.authorizedKeys.keyFiles = [
+          "${self}/ssh/host-game-1.pub"
+          "${self}/ssh/host-game-2.pub"
+          "${self}/ssh/host-game-3.pub"
+          "${self}/ssh/host-game-4.pub"
+          "${self}/ssh/host-game-5.pub"
+          "${self}/ssh/host-game-6.pub"
+        ];
+      };
     };
   };
 }
