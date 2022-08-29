@@ -144,19 +144,12 @@ in
 
       networking.hostName = name;
 
-      services.tf2ds.instances =
-        builtins.mapAttrs (_: i: removeAttrs i [ "host" ])
-          (lib.filterAttrs (_: i: i.host == name) rootConfig.tf2ds.instances);
+      # services.tf2ds.instances =
+      #   builtins.mapAttrs (_: i: removeAttrs i [ "host" ])
+      #     (lib.filterAttrs (_: i: i.host == name) rootConfig.tf2ds.instances);
     };
 
-    game-1 = {
-      deployment.targetHost = "10.10.11.31";
-
-      imports = [
-        modules.mumble
-      ];
-    };
-
+    game-1 = { deployment.targetHost = "10.10.11.31"; };
     game-2 = { deployment.targetHost = "10.10.11.32"; };
     game-3 = { deployment.targetHost = "10.10.11.33"; };
     game-4 = { deployment.targetHost = "10.10.11.34"; };
