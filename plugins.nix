@@ -33,12 +33,12 @@
     srctvplus = pkgs.runCommand "srctvplus"
       {
         so = pkgs.fetchurl {
-          url = "https://github.com/dalegaard/srctvplus/releases/download/v2.0/srctvplus.so";
-          sha256 = "sha256-KoFLjTQXY1nDzdG3x7eU/nTcmEqSH7tdqxFNyI2WCRg=";
+          url = "https://github.com/dalegaard/srctvplus/releases/download/v3.0/srctvplus.so";
+          sha256 = "sha256-6by0UFFdgOGHzcz8HHXyMNLWIAZm4rDWXy8Ciln830k=";
         };
 
         vdf = pkgs.fetchurl {
-          url = "https://github.com/dalegaard/srctvplus/releases/download/v2.0/srctvplus.vdf";
+          url = "https://github.com/dalegaard/srctvplus/releases/download/v3.0/srctvplus.vdf";
           sha256 = "sha256-iGKHyREgDB8vDv/CMv0BdAzAkTzZJyP98nzzxShUvro=";
         };
       }
@@ -61,6 +61,19 @@
       ''
         mkdir -p $out/tf/cfg
         cp -r $src/. $out/tf/cfg
+      '';
+
+    rgl-configs = pkgs.runCommand "rgl-configs"
+      {
+        src = pkgs.fetchzip {
+          url = "https://github.com/RGLgg/server-resources-updater/releases/download/v164/server-resources-updater.zip";
+          sha256 = "sha256-hr1YyeuOo6TnQtmHL/a79xROFWdle/DscWAiJ7Swsqc=";
+          stripRoot = false;
+        };
+      }
+      ''
+        mkdir -p $out/tf/cfg
+        cp -r $src/cfg/. $out/tf/cfg
       '';
 
     our-configs = pkgs.runCommand "our-configs" { } ''
@@ -187,7 +200,7 @@
       {
         src = pkgs.fetchzip {
           url = "http://sourcemod.krus.dk/recordstv.zip";
-          sha256 = "sha256-1flr1F4WydqTdmEzKpIOuEU6uMy19edMIEcQGmrgg2k=";
+          sha256 = "sha256-ifV0NyDki8D6YzkGXSDC7VDPgQ6t82aCqiyR4RycPKc=";
         };
       }
       ''
@@ -283,8 +296,9 @@
           cp_gullywash_f9 = "sha256-BgaQbICXVuP0ChFrZtIi7ZKQc/Y2+cOxssXbv5y8mls=";
           cp_metalworks_f4 = "sha256-Ny0QfDUnbhVyLVyiVdW2y0Yv0OMiMWUDKo4ocdUd6HI=";
           cp_process_f11 = "sha256-vafHG1dTDTGouu5BlxiStLgD0v+BFHGzfz52YkN+hM4=";
-          cp_snakewater_final1 = "sha256-YX1Ihx65bfyPZECp6O60GpR0Sq/YHfVh5/meEbZ3lXE=";
+          cp_snakewater_final1 = "sha256-jPUakk26s5ZsjmVSbSRbZsrRrIou8wz7vi60NIaEJ7Y=";
           cp_sunshine = "sha256-yprX0B9GESq7xbAvPRRPrYM+ag/zvYKh//OPqNPDJHQ=";
+          koth_bagel_rc5 = "sha256-dZ51Kqvv5U8QbtJEHeuQHqNJoADocMqvASVUZsWqxRc=";
           koth_product_final = "sha256-82zj1DN3zHhoIcQ+RMzIjulUm3yzDW55PTFhNMa1mwM=";
         }
     );

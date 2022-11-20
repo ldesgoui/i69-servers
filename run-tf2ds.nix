@@ -118,9 +118,14 @@
             game = "tf";
             ip = "0.0.0.0";
             maxplayers = 24;
+
+            strictportbind = true;
+            port = 30015;
             commands = [
               "sv_pure 2"
               "map itemtest"
+              "tv_port 30025"
+              "clientport 30016"
             ];
           }} \
           "+sv_password $password" "+rcon_password $rcon_password" \
