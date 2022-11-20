@@ -164,7 +164,7 @@
       {
         src = pkgs.fetchzip {
           url = "http://sourcemod.krus.dk/logstf.zip";
-          sha256 = "sha256-ifV0NyDki8D6YzkGXSDC7VDPgQ6t82aCqiyR4RycPKc=";
+          sha256 = "sha256-CnZlIaSM3seIQUwSKPMh4m8gpQCX9npRq3M7dAnq9KI=";
         };
       }
       ''
