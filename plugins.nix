@@ -164,7 +164,7 @@
       {
         src = pkgs.fetchzip {
           url = "http://sourcemod.krus.dk/logstf.zip";
-          sha256 = "sha256-QSwMq8penOKacFb2pvY5kbJ7CWjJPBCYaZUHAahnycY=";
+          sha256 = "sha256-ifV0NyDki8D6YzkGXSDC7VDPgQ6t82aCqiyR4RycPKc=";
         };
       }
       ''
@@ -176,7 +176,7 @@
       {
         src = pkgs.fetchzip {
           url = "http://sourcemod.krus.dk/supstats2.zip";
-          sha256 = "sha256-Y/lpVP0nV6XWg/scLnk4S1+q5qIOrF3CUmwvGD9vTeE=";
+          sha256 = "sha256-2RDnDQ5iVW/+VI89nuhKl/ANd3VAXMOanbdAJIp087E=";
         };
       }
       ''
@@ -188,7 +188,7 @@
       {
         src = pkgs.fetchzip {
           url = "http://sourcemod.krus.dk/medicstats.zip";
-          sha256 = "sha256-hkp07m60AQCDbL8yu0xrTh6mGTCwcehFsSI1F8JSTo0=";
+          sha256 = "sha256-830uBfB46NaWiYNkOZeRYXkqZ2Ytq7rpzL8MKtvsbKM=n";
         };
       }
       ''
@@ -212,7 +212,7 @@
       {
         src = pkgs.fetchzip {
           url = "http://sourcemod.krus.dk/afk.zip";
-          sha256 = "sha256-PdYX+B/TmAxmQInyQ0EOIZQ0RjO0OkpdlNIfD8cx164=";
+          sha256 = "sha256-6aftxWcvwf3Pc3WiLXxGEfmBZmWMZ89Kk+wj9MMBs8A=";
         };
       }
       ''
