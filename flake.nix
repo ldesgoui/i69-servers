@@ -3,7 +3,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
-    flake-parts.inputs.nixpkgs.follows = "nixpkgs";
+    flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
 
     agenix = {
       url = "github:ryantm/agenix";
@@ -21,8 +21,8 @@
     };
   };
 
-  outputs = { self, flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit self; }
+  outputs = inputs @ { flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; }
       ({ config, ... }:
         let
           rootConfig = config;
@@ -41,7 +41,6 @@
 
           perSystem = { lib, pkgs, inputs', ... }: {
             imports = [
-              ./depotdownloader.nix
               ./package-tf2ds.nix
               ./plugins.nix
               ./run-tf2ds.nix

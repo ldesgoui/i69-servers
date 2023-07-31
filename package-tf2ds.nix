@@ -132,7 +132,7 @@ in
           {
             buildInputs = [
               pkgs.cacert
-              config.packages.depotdownloader
+              pkgs.depotdownloader
             ];
 
             outputHashAlgo = "sha256";
@@ -187,7 +187,7 @@ in
       pkgs.writeShellScriptBin "prefetch-tf2ds-chunks" ''
         set -euo pipefail
 
-        export PATH=${config.packages.depotdownloader}/bin:${pkgs.jq}/bin:$PATH
+        export PATH=${pkgs.depotdownloader}/bin:${pkgs.jq}/bin:$PATH
 
         tmp=$(mktemp -dt prefetch-tf2ds.XXX)
 
