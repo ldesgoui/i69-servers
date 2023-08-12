@@ -98,7 +98,7 @@ in
       security.acme = {
         acceptTerms = true;
 
-        certs."mumble.i69.tf" = {
+        certs."mumble.i71.tf" = {
           email = "ldesgoui@gmail.com";
           dnsProvider = "gandiv5";
           credentialsFile = config.age.secrets.gandi-creds.path;
@@ -109,14 +109,14 @@ in
 
       services.murmur =
         let
-          certDir = config.security.acme.certs."mumble.i69.tf".directory;
+          certDir = config.security.acme.certs."mumble.i71.tf".directory;
         in
         {
           enable = true;
           bandwidth = 320000;
           bonjour = true;
           port = 6900;
-          registerName = "mumble.i69.tf";
+          registerName = "mumble.i71.tf";
           users = 420;
 
           sslCert = "${certDir}/cert.pem";

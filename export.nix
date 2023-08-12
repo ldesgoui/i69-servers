@@ -5,7 +5,7 @@ let
       (lib.mapAttrsToList (name: opts: rec {
         inherit name;
         inherit (opts) host port stvPort;
-        hostname = "${name}.i69.tf";
+        hostname = "${name}.i71.tf";
       }))
       (lib.partition (x: lib.hasPrefix "match-" x.name))
       (xs: xs.right ++ xs.wrong)

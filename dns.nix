@@ -11,7 +11,7 @@ in
     };
   };
 
-  config.dns.zone."i69.tf" = { config, ... }:
+  config.dns.zone."i71.tf" = { config, ... }:
     let
       inherit (dns.lib.combinators) letsEncrypt;
       cname = target: { CNAME = [ target ]; };
@@ -24,7 +24,7 @@ in
       SOA = {
         nameServer = "ns1.gandi.net";
         adminEmail = "hostmaster@gandi.net";
-        serial = 1661002392;
+        serial = 1691858200;
       };
 
       CAA = letsEncrypt "ldesgoui@gmail.com";
@@ -38,7 +38,6 @@ in
           game-4.A = [ "10.10.11.34" ];
           game-5.A = [ "10.10.11.35" ];
           game-6.A = [ "10.10.11.36" ];
-          spec-1.A = [ "54.36.190.233" ];
         };
 
         mumble.SRV =
