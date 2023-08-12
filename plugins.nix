@@ -21,8 +21,8 @@
     mms = pkgs.runCommand "metamod-source"
       {
         src = pkgs.fetchzip {
-          url = "https://mms.alliedmods.net/mmsdrop/1.11/mmsource-1.11.0-git1147-linux.tar.gz";
-          sha256 = "sha256-AcsHetmsoxuWhAoyiaOxslKDmTH+yeVF/8r7x6OH1yM=";
+          url = "https://mms.alliedmods.net/mmsdrop/1.11/mmsource-1.11.0-git1148-linux.tar.gz";
+          sha256 = "sha256-sagVdWILjh0p+/tMdTjjxjtyrIz+6jkZb1pTiD6NoXs=";
         };
       }
       ''
@@ -33,12 +33,12 @@
     srctvplus = pkgs.runCommand "srctvplus"
       {
         so = pkgs.fetchurl {
-          url = "https://github.com/dalegaard/srctvplus/releases/download/v2.0/srctvplus.so";
-          sha256 = "sha256-KoFLjTQXY1nDzdG3x7eU/nTcmEqSH7tdqxFNyI2WCRg=";
+          url = "https://github.com/dalegaard/srctvplus/releases/download/v3.0/srctvplus.so";
+          sha256 = "sha256-6by0UFFdgOGHzcz8HHXyMNLWIAZm4rDWXy8Ciln830k=";
         };
 
         vdf = pkgs.fetchurl {
-          url = "https://github.com/dalegaard/srctvplus/releases/download/v2.0/srctvplus.vdf";
+          url = "https://github.com/dalegaard/srctvplus/releases/download/v3.0/srctvplus.vdf";
           sha256 = "sha256-iGKHyREgDB8vDv/CMv0BdAzAkTzZJyP98nzzxShUvro=";
         };
       }
@@ -73,8 +73,8 @@
     sm = pkgs.runCommand "sourcemod"
       {
         src = pkgs.fetchzip {
-          url = "https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6544-linux.tar.gz";
-          sha256 = "sha256-pdIstFAztwbK361Xnb1DKGawGf5olFI9mM8BV/fIf9o=";
+          url = "https://sm.alliedmods.net/smdrop/1.11/sourcemod-1.11.0-git6936-linux.tar.gz";
+          sha256 = "sha256-LAQH85EcP8idiLoqrwS3MHCWdZr0JU4HJLF84Jc3tDA=";
           stripRoot = false;
         };
       }
@@ -83,17 +83,17 @@
         cp -r $src/. $out/tf/
       '';
 
-    dhooks = pkgs.runCommand "dhooks"
-      {
-        src = pkgs.fetchzip {
-          url = "https://github.com/peace-maker/DHooks2/releases/download/v2.2.0-detours17/dhooks-2.2.0-detours17-sm110.zip";
-          sha256 = "sha256-LOFTaXalpm0fC1ZOG81RZHWcU1eGk0/p/ItdGuShy8Y=";
-        };
-      }
-      ''
-        mkdir -p $out/tf/addons/
-        cp -r $src/. $out/tf/addons/
-      '';
+    # dhooks = pkgs.runCommand "dhooks"
+    #   {
+    #     src = pkgs.fetchzip {
+    #       url = "https://github.com/peace-maker/DHooks2/releases/download/v2.2.0-detours17/dhooks-2.2.0-detours17-sm110.zip";
+    #       sha256 = "sha256-LOFTaXalpm0fC1ZOG81RZHWcU1eGk0/p/ItdGuShy8Y=";
+    #     };
+    #   }
+    #   ''
+    #     mkdir -p $out/tf/addons/
+    #     cp -r $src/. $out/tf/addons/
+    #   '';
 
     curl = pkgs.runCommand "curl"
       {
@@ -110,8 +110,8 @@
     tf2-comp-fixes = pkgs.runCommand "tf2-comp-fixes"
       {
         src = pkgs.fetchzip {
-          url = "https://github.com/ldesgoui/tf2-comp-fixes/releases/download/v1.16.10/tf2-comp-fixes.zip";
-          sha256 = "sha256-7nuHm0XdhK5sP7qHf1XQyrrrmYxGT8NJYDKRzRRV2ks=";
+          url = "https://github.com/ldesgoui/tf2-comp-fixes/releases/download/v1.16.13/tf2-comp-fixes.zip";
+          sha256 = "sha256-VOVK/Q9HZtRSFeUTgda/JDnmFarvEFuaym3nfsphrtU=";
         };
       }
       ''
@@ -147,64 +147,17 @@
         cp -r $src/maps/. $out/tf/maps
       '';
 
-    logstf = pkgs.runCommand "logstf"
+    f2-plugins = pkgs.runCommand "f2-plugins"
       {
         src = pkgs.fetchzip {
-          url = "http://sourcemod.krus.dk/logstf.zip";
-          sha256 = "sha256-QSwMq8penOKacFb2pvY5kbJ7CWjJPBCYaZUHAahnycY=";
+          url = "https://github.com/F2/F2s-sourcemod-plugins/releases/download/20230501-1682976916791/f2-sourcemod-plugins.zip";
+          sha256 = "sha256-sKy37pdQnpQhTk/Eeivkn0PZYk3Pw6QKAAO9mufkkfo=";
+          stripRoot = false;
         };
       }
       ''
         mkdir -p $out/tf/addons/sourcemod/plugins
-        cp -r $src/. $out/tf/addons/sourcemod/plugins/
-      '';
-
-    sup-stats = pkgs.runCommand "supstats2"
-      {
-        src = pkgs.fetchzip {
-          url = "http://sourcemod.krus.dk/supstats2.zip";
-          sha256 = "sha256-Y/lpVP0nV6XWg/scLnk4S1+q5qIOrF3CUmwvGD9vTeE=";
-        };
-      }
-      ''
-        mkdir -p $out/tf/addons/sourcemod/plugins
-        cp -r $src/. $out/tf/addons/sourcemod/plugins/
-      '';
-
-    medic-stats = pkgs.runCommand "medicstats"
-      {
-        src = pkgs.fetchzip {
-          url = "http://sourcemod.krus.dk/medicstats.zip";
-          sha256 = "sha256-hkp07m60AQCDbL8yu0xrTh6mGTCwcehFsSI1F8JSTo0=";
-        };
-      }
-      ''
-        mkdir -p $out/tf/addons/sourcemod/plugins
-        cp -r $src/. $out/tf/addons/sourcemod/plugins/
-      '';
-
-    record-stv = pkgs.runCommand "recordstv"
-      {
-        src = pkgs.fetchzip {
-          url = "http://sourcemod.krus.dk/recordstv.zip";
-          sha256 = "sha256-1flr1F4WydqTdmEzKpIOuEU6uMy19edMIEcQGmrgg2k=";
-        };
-      }
-      ''
-        mkdir -p $out/tf/addons/sourcemod/plugins
-        cp -r $src/. $out/tf/addons/sourcemod/plugins/
-      '';
-
-    afk-detector = pkgs.runCommand "afk"
-      {
-        src = pkgs.fetchzip {
-          url = "http://sourcemod.krus.dk/afk.zip";
-          sha256 = "sha256-PdYX+B/TmAxmQInyQ0EOIZQ0RjO0OkpdlNIfD8cx164=";
-        };
-      }
-      ''
-        mkdir -p $out/tf/addons/sourcemod/plugins
-        cp -r $src/. $out/tf/addons/sourcemod/plugins/
+        cp -r $src/{afk,logstf,medicstats,recordstv,supstats2}.smx $out/tf/addons/sourcemod/plugins/
       '';
 
     demostf = pkgs.runCommand "demostf"
@@ -283,7 +236,7 @@
           cp_gullywash_f9 = "sha256-BgaQbICXVuP0ChFrZtIi7ZKQc/Y2+cOxssXbv5y8mls=";
           cp_metalworks_f4 = "sha256-Ny0QfDUnbhVyLVyiVdW2y0Yv0OMiMWUDKo4ocdUd6HI=";
           cp_process_f11 = "sha256-vafHG1dTDTGouu5BlxiStLgD0v+BFHGzfz52YkN+hM4=";
-          cp_snakewater_final1 = "sha256-YX1Ihx65bfyPZECp6O60GpR0Sq/YHfVh5/meEbZ3lXE=";
+          cp_snakewater_final1 = "sha256-8J1AbSu+OXyPnfnKF/EbNrU9QPz1fj8VMuya+BGyoes=";
           cp_sunshine = "sha256-yprX0B9GESq7xbAvPRRPrYM+ag/zvYKh//OPqNPDJHQ=";
           koth_product_final = "sha256-82zj1DN3zHhoIcQ+RMzIjulUm3yzDW55PTFhNMa1mwM=";
         }
