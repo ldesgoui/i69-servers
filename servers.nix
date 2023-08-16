@@ -5,7 +5,7 @@ let
 in
 {
   flake.nixosModules = {
-    common = { config, name, ... }: {
+    common = { config, name, pkgs, ... }: {
       # from modules/profiles/headless.nix
       boot.loader.grub.splashImage = null;
 
@@ -16,6 +16,10 @@ in
         man.enable = lib.mkForce false;
         nixos.enable = lib.mkForce false;
       };
+
+      environment.systemPackages = [
+        pkgs.htop
+      ];
 
       i18n.supportedLocales = lib.mkForce [ "en_US.UTF-8/UTF-8" ];
 
