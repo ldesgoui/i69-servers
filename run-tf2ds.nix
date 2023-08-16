@@ -122,6 +122,8 @@
               "sv_pure 2"
               "map itemtest"
             ];
+
+            enablefakeip = true;
           }} \
           "+sv_password $password" "+rcon_password $rcon_password" \
           $@

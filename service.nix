@@ -28,6 +28,7 @@ in
               ip = "0.0.0.0";
               scriptportbind = true;
               inherit (opts) port;
+              enablefakeip = true;
             }
             // opts.args
             // {
