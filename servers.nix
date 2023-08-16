@@ -128,9 +128,9 @@ in
 
       networking.hostName = name;
 
-      # services.tf2ds.instances =
-      #   builtins.mapAttrs (_: i: removeAttrs i [ "host" ])
-      #     (lib.filterAttrs (_: i: i.host == name) rootConfig.tf2ds.instances);
+      services.tf2ds.instances =
+        builtins.mapAttrs (_: i: removeAttrs i [ "host" ])
+          (lib.filterAttrs (_: i: i.host == name) rootConfig.tf2ds.instances);
     };
 
     game-1 = { deployment.targetHost = "10.10.11.31"; };
