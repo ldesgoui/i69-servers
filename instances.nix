@@ -98,8 +98,5 @@ in
         "map itemtest"
       ];
     };
-
-    relay-1 = { host = "spec-1"; port = 6801; stvPort = 6901; args.commands = [ ]; };
-    relay-2 = { host = "spec-1"; port = 6802; stvPort = 6902; args.commands = [ ]; };
   };
 }
