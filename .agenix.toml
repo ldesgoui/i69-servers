@@ -1,25 +1,16 @@
 [identities]
 root = "age1xzkgqkethzqdkxck5dyykzgx8n6y8wmy96d3jm77jzgw9g9yx4kqppzfg2"
 ldesgoui = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK25ea20daUVvmTPmUL1nF/0DXEz/7tPBXOSerQNTf6+"
-game-1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOyjEJkNPVB5BZZfxg5PqZ5MXl/8ZJUQNrm/Vm9LoOlg"
-game-2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGSLF7G4nFiRqymYjkkN3QLctcNxDh+W8lgF9sgkFxXx"
-game-3 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB3JhQ+BhEpDh21OTGC/7RsXoidnQDVi3qHpkpSgWu1y"
-game-4 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINdA4M1J7i+7GXKmjPtZZsUJkQCG9dYxAO3dfcsWBklk"
-game-5 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICtqfrDG42rHKFLTXLFi/2AygpZuCqTdHfK2n1muW9MQ"
-game-6 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBFzbjzs9pAEJDlSN4O4Gip7gKVHSb8oJengNelOUfsH"
-spec-1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK93/t8Q3v3WrJ2eeZfsz2dXhK1SQFdGcEX1oEciaeH4"
+game-1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII0gx4mLAHbzQ2HM+4KbHYxi6zh9ZX8/J12cQ/qmQJ4D"
+game-2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL5fiRhJPhLslM6OMsGWmrDNE/O366CcxKlV6NEPD2CM"
+game-3 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHRN/RbelaVSVezFG6IYDqk+bafFkRY9ZLPiKBuHnuvE"
+game-4 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIT1AR2dVkpPI3qiIhoLSnW5HzC89QAyG3GKO3uJlXbe"
+game-5 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMTxealSMTzNxKoxfahAthT1MTRj8egoD8dMPMBy3wLs"
+game-6 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIClNcVNvee749fRDbMgsbUh4NiuNvuTKKIj8SbrrtY0T"
 
 [groups]
 admins = ["root", "ldesgoui"]
-servers = [
-    "game-1",
-    "game-2",
-    "game-3",
-    "game-4",
-    "game-5",
-    "game-6",
-    "spec-1",
-]
+servers = ["game-1", "game-2", "game-3", "game-4", "game-5", "game-6"]
 
 [[paths]]
 glob = "root-password.age"
@@ -58,11 +49,6 @@ identities = ["game-5"]
 glob = "wg/game-6.age"
 groups = ["admins"]
 identities = ["game-6"]
-
-[[paths]]
-glob = "wg/spec-1.age"
-groups = ["admins"]
-identities = ["spec-1"]
 
 [[paths]]
 glob = "cfg/*.age"

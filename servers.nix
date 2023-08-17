@@ -122,7 +122,6 @@ in
       };
 
       imports = [
-        modules.age
         modules.common
         modules.tf2ds
         self.inputs.agenix.nixosModules.age

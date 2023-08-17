@@ -31,7 +31,6 @@
           systems = [ "x86_64-linux" ];
 
           imports = [
-            ./age.nix
             ./dns.nix
             ./export.nix
             ./instances.nix
