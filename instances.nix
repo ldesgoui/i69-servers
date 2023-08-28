@@ -59,7 +59,7 @@ in
   config.tf2ds.instances = {
     match-01 = { host = "game-1"; port = 6901; stvPort = 6941; };
     match-02 = { host = "game-1"; port = 6902; stvPort = 6942; };
-    match-03 = { host = "game-1"; port = 6903; stvPort = 6943; };
+    # match-03 = { host = "game-1"; port = 6903; stvPort = 6943; };
 
     match-04 = { host = "game-2"; port = 6904; stvPort = 6944; };
     match-05 = { host = "game-2"; port = 6905; stvPort = 6945; };
@@ -70,7 +70,7 @@ in
     match-09 = { host = "game-3"; port = 6909; stvPort = 6949; };
 
     match-10 = { host = "game-4"; port = 6910; stvPort = 6950; };
-    # match-11 = { host = "game-4"; port = 6911; stvPort = 6951; };
+    match-11 = { host = "game-4"; port = 6911; stvPort = 6951; };
     match-12 = { host = "game-4"; port = 6912; stvPort = 6952; };
 
     match-13 = { host = "game-5"; port = 6913; stvPort = 6953; };
@@ -79,13 +79,13 @@ in
 
     match-16 = { host = "game-6"; port = 6916; stvPort = 6956; };
     match-17 = { host = "game-6"; port = 6917; stvPort = 6957; };
-    match-18 = { host = "game-6"; port = 6918; stvPort = 6958; };
+    # match-18 = { host = "game-6"; port = 6918; stvPort = 6958; };
 
     dm-1 = { host = "game-1"; stvPort = 6991; } // dm;
-    dm-2 = { host = "game-2"; stvPort = 6992; } // dm;
-    dm-3 = { host = "game-3"; stvPort = 6993; } // dm;
-    dm-4 = { host = "game-4"; stvPort = 6994; } // dm;
-    dm-5 = { host = "game-5"; stvPort = 6995; } // dm;
+    # dm-2 = { host = "game-2"; stvPort = 6992; } // dm;
+    # dm-3 = { host = "game-3"; stvPort = 6993; } // dm;
+    # dm-4 = { host = "game-4"; stvPort = 6994; } // dm;
+    # dm-5 = { host = "game-5"; stvPort = 6995; } // dm;
 
     mge = {
       host = "game-6";
