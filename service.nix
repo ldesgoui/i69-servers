@@ -33,7 +33,7 @@ in
             // opts.args
             // {
               commands = [
-                # ''hostname "i71.tf - ${name}"''
+                ''hostname "i71.tf - ${name}"''
                 "tv_port ${toString opts.stvPort}"
                 "clientport ${toString (50000 + opts.port)}"
               ]
