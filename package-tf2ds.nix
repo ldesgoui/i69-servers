@@ -7,16 +7,16 @@ in
   options.tf2ds = {
     version = mkOption {
       type = types.str;
-      default = "2023.07.28";
+      default = "2023.08.31";
     };
 
     manifests = mkOption {
       type = with types; attrsOf str;
       default = {
         # https://steamdb.info/depot/232250/
-        "232250" = "3243767659984921464";
+        "232250" = "708194838213373863";
         # https://steamdb.info/depot/232256/
-        "232256" = "794676031397025408";
+        "232256" = "9168051869756670538";
       };
     };
 
