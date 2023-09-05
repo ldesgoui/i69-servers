@@ -14,14 +14,12 @@ in
 {
   perSystem = { pkgs, ... }: {
     packages.export-server-connects = pkgs.writeShellScriptBin "export-server-connects" ''
-      echo '"Server ID","Current Use","Connect","STV Connect","RCON","SDR STV"'
+      echo '"Connect","STV Connect","RCON","SDR STV Connect"'
       ${lib.getExe pkgs.jq} -r --slurpfile pw ./passwords.json '
         .[]
         | $pw[0][.name] as $pw
         | "ssh root@\(.host).nodes.i71.tf cat /var/lib/tf2ds/\(.name)/tf/sdr-stv.txt" as $ssh
         | [
-          .name,
-          "",
           "connect \(.hostname)"
             + if .port != 27015 then ":\(.port)" else "" end
             + if $pw.sv_password then "; password \($pw.sv_password)" else "" end,
