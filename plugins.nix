@@ -226,6 +226,19 @@
         cp -r $src/. $out/tf/addons/
       '';
 
+    steampawn = pkgs.runCommand "sm-steampawn"
+      {
+        src = pkgs.fetchzip {
+          url = "https://github.com/nosoop/SM-SteamPawn/releases/download/1.2.0/package.zip";
+          sha256 = "sha256-fU++TrifhvqxGey6oM48DP0XAgCAiDqHvuVZskA9I+M=";
+          stripRoot = false;
+        };
+      }
+      ''
+        mkdir -p $out/tf/addons/sourcemod
+        cp -r $src/. $out/tf/addons/sourcemod
+      '';
+
     # This is fine.
     maps = pkgs.linkFarm "maps" (
       lib.mapAttrsToList
