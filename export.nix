@@ -18,7 +18,7 @@ in
       ${lib.getExe pkgs.jq} -r --slurpfile pw ./passwords.json '
         .[]
         | $pw[0][.name] as $pw
-        | "ssh root@\(.host).nodes.i71.tf cat /var/lib/tf2ds-\(.name)/tf/sdr-stv.txt" as $ssh
+        | "ssh root@\(.host).nodes.i71.tf cat /var/lib/tf2ds/\(.name)/tf/sdr-stv.txt" as $ssh
         | [
           .name,
           "",
