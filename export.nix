@@ -14,9 +14,12 @@ in
 {
   perSystem = { pkgs, ... }: {
     packages.export-server-connects = pkgs.writeShellScriptBin "export-server-connects" ''
-      echo '"Server ID","Current Use","Connect","STV Connect","RCON","Relay Command"'
+      echo '"Server ID","Current Use","Connect","STV Connect","RCON","SDR STV"'
       ${lib.getExe pkgs.jq} -r --slurpfile pw ./passwords.json '
-        .[] | $pw[0][.name] as $pw | [
+        .[]
+        | $pw[0][.name] as $pw
+        | "ssh root@\(.host).nodes.i71.tf cat /var/lib/tf2ds-\(.name)/tf/sdr-stv.txt" as $ssh
+        | [
           .name,
           "",
           "connect \(.hostname)"
@@ -25,9 +28,13 @@ in
           "connect \(.hostname):\(.stvPort)"
             + if $pw.tv_password then "; password \($pw.tv_password)" else "" end,
           if $pw.rcon_password then "rcon_address \(.hostname):\(.port); rcon_password \($pw.rcon_password)" else "" end,
-          "rcon tv_relay \"\(.hostname):\(.stvPort)\"" + if $pw.tv_relaypassword then "; rcon password \"\($pw.tv_relaypassword)\"" else "" end
-        ] | @csv
-      ' ${pkgs.writeText "out.json" (builtins.toJSON out)}
+          "connect %s"
+            + if $pw.tv_password then "; password \($pw.tv_password)" else "" end
+        ]
+        | @csv | @sh
+        | "printf \(.)\"\\n\" \"$(\($ssh))\"" | @sh
+      ' ${pkgs.writeText "out.json" (builtins.toJSON out)} \
+      | xargs -L1 sh -c
     '';
   };
 }
