@@ -64,8 +64,7 @@
       '';
 
     our-configs = pkgs.runCommand "our-configs" { } ''
-      mkdir -p $out/tf/{addons,cfg}
-      cp -r ${./addons}/. $out/tf/addons
+      mkdir -p $out/tf/cfg
       cp -r ${./cfg}/. $out/tf/cfg
     '';
   };
@@ -83,6 +82,11 @@
         mkdir -p $out/tf
         cp -r $src/. $out/tf/
       '';
+
+    our-plugins = pkgs.runCommand "our-plugins" { } ''
+      mkdir -p $out/tf/addons
+      cp -r ${./addons}/. $out/tf/addons
+    '';
 
     # dhooks = pkgs.runCommand "dhooks"
     #   {
