@@ -64,7 +64,8 @@
       '';
 
     our-configs = pkgs.runCommand "our-configs" { } ''
-      mkdir -p $out/tf/cfg
+      mkdir -p $out/tf/{addons,cfg}
+      cp -r ${./addons}/. $out/tf/addons
       cp -r ${./cfg}/. $out/tf/cfg
     '';
   };
