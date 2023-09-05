@@ -83,9 +83,9 @@ in
 
     dm-1 = { host = "game-1"; stvPort = 6991; } // dm;
     dm-2 = { host = "game-2"; stvPort = 6992; } // dm;
-    # dm-3 = { host = "game-3"; stvPort = 6993; } // dm;
-    # dm-4 = { host = "game-4"; stvPort = 6994; } // dm;
-    # dm-5 = { host = "game-5"; stvPort = 6995; } // dm;
+    dm-3 = { host = "game-3"; stvPort = 6993; } // dm;
+    dm-4 = { host = "game-4"; stvPort = 6994; } // dm;
+    dm-5 = { host = "game-5"; stvPort = 6995; } // dm;
 
     mge = {
       host = "game-6";
