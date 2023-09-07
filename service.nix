@@ -57,7 +57,7 @@ in
                 ln -fns ${config.age.secrets."apikeys.cfg".path} tf/cfg/
 
                 ${lib.getExe pkgs.jq} -r --arg name "${name}" '
-                  .[$name] | to_entries[] | "\(.key) \"\(.value)\""
+                  .[$name] // [] | to_entries[] | "\(.key) \"\(.value)\""
                 ' ${config.age.secrets."passwords.json".path} > tf/cfg/passwords.cfg
 
                 ${lib.getExe pkgs.xorg.lndir} -silent ${packages.all-plugins} ./
