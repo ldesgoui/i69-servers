@@ -257,6 +257,10 @@
           cp_sunshine = "sha256-yprX0B9GESq7xbAvPRRPrYM+ag/zvYKh//OPqNPDJHQ=";
           koth_bagel_rc6 = "sha256-EmSVSTaJqbhM9bY+r15bMESJyzJfcOCWixaFn+9PEs8=";
           koth_product_final = "sha256-82zj1DN3zHhoIcQ+RMzIjulUm3yzDW55PTFhNMa1mwM=";
+
+          pl_badwater = "sha256-aGVFAqvwLCBYYvoDRAP1ganfnTExeT5/v3vvkmxhrEg=";
+          pl_upward = "sha256-Fcv5GYGw2ZAsZF0ZktGWt+YwdCqoURHtg00jHzw6Vwk=";
+          koth_nucleus = "sha256-2kk7yEWeAj8ZapBspzgrRUK1Poh3jWL0cM6AG6eOtg0=";
         }
     );
 
