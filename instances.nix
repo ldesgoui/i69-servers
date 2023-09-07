@@ -93,7 +93,7 @@ in
       stvPort = 6998;
       args.commands = [
         "exec pub"
-        "map pl_badwater"
+        "randommap"
       ];
     };
 
