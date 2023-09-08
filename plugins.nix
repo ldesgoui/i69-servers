@@ -53,8 +53,8 @@
     etf2l-configs = pkgs.runCommand "etf2l-configs"
       {
         src = pkgs.fetchzip {
-          url = "https://github.com/ETF2L/gameserver-configs/releases/download/1.0.6/etf2l_configs.zip";
-          sha256 = "sha256-s8td1M9+f0TmEhAgP78ezlr0WNMJ33FLM4XFnLPXN7c=";
+          url = "https://github.com/ETF2L/gameserver-configs/releases/download/1.0.9/etf2l_configs.zip";
+          sha256 = "sha256-oOK/lRXCNcUniq7gLe8pTVmupMZFfBhO3x7oTSr5efA=";
           stripRoot = false;
         };
       }
