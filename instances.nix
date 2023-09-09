@@ -91,6 +91,7 @@ in
       host = "game-5";
       port = 27015;
       stvPort = 6998;
+      args.unrestricted_maxplayers = true;
       args.maxplayers = 100;
       args.commands = [
         "exec pub"
