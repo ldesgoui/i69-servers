@@ -91,6 +91,7 @@ in
       host = "game-5";
       port = 27015;
       stvPort = 6998;
+      args.maxplayers = 100;
       args.commands = [
         "exec pub"
         "map pl_badwater"
